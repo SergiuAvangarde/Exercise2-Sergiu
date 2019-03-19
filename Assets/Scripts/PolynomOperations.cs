@@ -56,7 +56,7 @@ public class PolynomOperations : MonoBehaviour
         resultedAddedEquation.Sort((a, b) => -1 * a.exponent.CompareTo(b.exponent));
     }
 
-    //searches on two polynom equations, multyplies the coeficients and adds the exponents
+    //function to search on two polynom equations, multiply the coeficients and add the exponents
     //it creates a new Monom List with the new values
     private void MultiplyArrays()
     {
@@ -69,7 +69,7 @@ public class PolynomOperations : MonoBehaviour
         {
             for (int j = 0; j <= polynom2.PolynomialEquation.Count - 1; j++)
             {
-                coeficientResult = polynom1.PolynomialEquation[i].coefficient * polynom2.PolynomialEquation[j].coefficient;
+                coeficientResult = (polynom1.PolynomialEquation[i].coefficient * polynom1.PolynomialEquation[i].sign) * (polynom2.PolynomialEquation[j].coefficient * polynom2.PolynomialEquation[j].sign);
                 exponentResult = polynom1.PolynomialEquation[i].exponent + polynom2.PolynomialEquation[j].exponent;
 
                 resultedAddedEquation.Add(Monom.CreateMonomObj(coeficientResult, exponentResult));
@@ -91,11 +91,11 @@ public class PolynomOperations : MonoBehaviour
             {
                 if (operation)
                 {
-                    result = first[i].coefficient + first[i + 1].coefficient;
+                    result = (first[i].coefficient * first[i].sign) + (first[i + 1].coefficient * first[i + 1].sign);
                 }
                 else
                 {
-                    result = first[i].coefficient - first[i + 1].coefficient;
+                    result = (first[i].coefficient * first[i].sign) - (first[i + 1].coefficient * first[i + 1].sign);
                 }
 
                 if (result != 0)

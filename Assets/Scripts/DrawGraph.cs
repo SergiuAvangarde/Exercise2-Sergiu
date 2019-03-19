@@ -22,26 +22,26 @@ public class DrawGraph : MonoBehaviour
 
         for (float i = -10; i < 10; i += 0.1f)
         {
-            float sign = new float();
-            if((i) < 0)
+            float xSign = new float();
+            if(i < 0)
             {
-                sign = -1;
+                xSign = -1;
             }
             else
             {
-                sign = 1;
+                xSign = 1;
             }
 
             float result = new float();
-            foreach (var polynom in PolynomEquation)
+            foreach (var monom in PolynomEquation)
             {
-                if (polynom.exponent % 2 == 0)
+                if (monom.exponent % 2 == 0)
                 {
-                    result += polynom.coefficient * Mathf.Pow(Mathf.Abs(i), polynom.exponent);
+                    result += monom.coefficient * monom.sign * Mathf.Pow(Mathf.Abs(i), monom.exponent);
                 }
                 else
                 {
-                    result += polynom.coefficient * (Mathf.Pow(Mathf.Abs(i), polynom.exponent) * sign);
+                    result += monom.coefficient * monom.sign * (Mathf.Pow(Mathf.Abs(i), monom.exponent) * xSign);
                 }
             }
             pointsList.Add(new Vector3(i, result, 0));

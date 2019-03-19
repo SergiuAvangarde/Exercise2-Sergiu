@@ -74,7 +74,7 @@ public class AdvancedOperations : MonoBehaviour
         {
             if (monom.exponent > 0)
             {
-                coeficientResult = monom.coefficient * monom.exponent;
+                coeficientResult = monom.coefficient * monom.sign * monom.exponent;
                 exponentResult = monom.exponent - 1;
 
                 resultedPolynomEquation.Add(Monom.CreateMonomObj(coeficientResult, exponentResult));
@@ -90,10 +90,10 @@ public class AdvancedOperations : MonoBehaviour
         float coeficientResult = new float();
         float exponentResult = new float();
 
-        foreach (var polynom in initialPolynomEquation)
+        foreach (var monom in initialPolynomEquation)
         {
-            coeficientResult = polynom.coefficient / (polynom.exponent + 1);
-            exponentResult = polynom.exponent + 1;
+            coeficientResult = monom.coefficient * monom .sign / (monom.exponent + 1);
+            exponentResult = monom.exponent + 1;
 
             resultedPolynomEquation.Add(Monom.CreateMonomObj(coeficientResult, exponentResult));
         }
@@ -107,25 +107,25 @@ public class AdvancedOperations : MonoBehaviour
         float result = new float();
         XNumber = float.Parse(xValue.text);
 
-        float sign = new float();
+        float xSign = new float();
         if (XNumber < 0)
         {
-            sign = -1;
+            xSign = -1;
         }
         else
         {
-            sign = 1;
+            xSign = 1;
         }
 
-        foreach (var polynom in initialPolynomEquation)
+        foreach (var monom in initialPolynomEquation)
         {
-            if (polynom.exponent % 2 == 0)
+            if (monom.exponent % 2 == 0)
             {
-                result += polynom.coefficient * Mathf.Pow(Mathf.Abs(XNumber), polynom.exponent);
+                result += monom.coefficient * monom.sign * Mathf.Pow(Mathf.Abs(XNumber), monom.exponent);
             }
             else
             {
-                result += polynom.coefficient * (Mathf.Pow(Mathf.Abs(XNumber), polynom.exponent) * sign);
+                result += monom.coefficient * monom.sign * (Mathf.Pow(Mathf.Abs(XNumber), monom.exponent) * xSign);
             }
         }
 
