@@ -20,9 +20,12 @@ If the added list with the multiply result has 2 monoms with the same exponent v
 
 For Derivate, Integrate and Set value of X operations it takes the coresponding input polynom or resulted polynom, and aplies the coresponding math operation.
 
-The Graph is calculated by setting the value of X with values ranging from -10 to 10, At every value of X it sets the exact point for the line on the graph, for a smoother curve I incremented the value of X by 0.1 at every point. To match the graph scale with the point coordinates I scaled the line in the inspector, and this way if i give the coordinates X = 2.5f and Y = 5.0f, that point will be exactly at 2.5 on the X scale and 5 on Y scale according to the graph background.
+The Graph is calculated by setting the value of X with values ranging from -10 to 10, At every value of X it sets the exact point for the line on the graph, for a smoother curve I incremented the value of X by 0.1 at every point. 
+
+To match the graph scale with the point coordinates I scaled the line in the inspector, and this way if I give the coordinates on X = 2.5f and in Y = 5.0f, that point will be exactly at 2.5 on the X scale and 5 on Y scale according to the graph background.
 
 ## Further improvements wich could be done:
 
-- I could make the posibility to select wich polynoms to add, substract or multiply, currently I can only operate on the input polynomyals, not the resulted polynomyals from derivate or integrate functions.
-- The UI can be improved to look nicer
+- I could make the posibility to select wich polynoms to add, substract or multiply, currently, the program can only operate on the input polynomyals, not the resulted polynomyals from derivate or integrate functions.
+- I could add an Divide funtion on the polynoms.
+- The UI can be improved to look nicer.
