@@ -24,5 +24,5 @@ The Graph is calculated by setting the value of X with values ranging from -10 t
 
 ## Further improvements wich could be done:
 
-- I could make the posibility to select wich polynoms to add, substract or multiply, currently I can only add the input polynoms, not the resulted polynom from derivate or integrate functions.
+- I could make the posibility to select wich polynoms to add, substract or multiply, currently I can only operate on the input polynomyals, not the resulted polynomyals from derivate or integrate functions.
 - The UI can be improved to look nicer
