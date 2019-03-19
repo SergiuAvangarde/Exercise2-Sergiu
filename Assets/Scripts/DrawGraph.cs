@@ -5,12 +5,7 @@ using UnityEngine;
 public class DrawGraph : MonoBehaviour
 {
     public List<Monom> PolynomEquation { get; set; }
-
-    [SerializeField]
-    private GameObject Point;
-
-    private List<Vector3> positions;
-    private Transform[] Points = new Transform[220];
+    private List<Vector3> pointsList;
     private LineRenderer Line;
 
     //sets a reference for the line renderer component
@@ -23,9 +18,8 @@ public class DrawGraph : MonoBehaviour
     //it is incrementing by 0.1 for a smoother curve on the graph
     public void CreateGraph()
     {
-        List<Vector3> pointsList = new List<Vector3>();
+        pointsList = new List<Vector3>();
 
-        int j = 0;
         for (float i = -10; i < 10; i += 0.1f)
         {
             float sign = new float();
@@ -50,14 +44,7 @@ public class DrawGraph : MonoBehaviour
                     result += polynom.coefficient * (Mathf.Pow(Mathf.Abs(i), polynom.exponent) * sign);
                 }
             }
-
-            var point = Instantiate(Point, gameObject.transform);
-
-            point.transform.localPosition = new Vector3(i, result, 0);
-            
-            Points[j] = point.transform;
-            pointsList.Add(Points[j].localPosition);
-            j++;
+            pointsList.Add(new Vector3(i, result, 0));
         }
 
         Line.positionCount = pointsList.Count;
