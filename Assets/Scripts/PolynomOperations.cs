@@ -86,14 +86,15 @@ public class PolynomOperations : MonoBehaviour
         resultedAddedEquation.Sort((a, b) => -1 * a.exponent.CompareTo(b.exponent));
     }
 
-
-
-    //-----------------------------------------------------------------------------------------------------
-    private void DividePolynoms(List<Monom> polynom1, List<Monom> polynom2, List<Monom> remainder)
+    //this function takes two polynoms, checks the first coeficient of every equation and divides them if they can be divided
+    //the function is recalled until the polynoms can't be divided anymore
+    //and the function returns a remainder if there is any
+    private List<Monom> DividePolynoms(List<Monom> polynom1, List<Monom> polynom2)
     {
         Monom DivideMonom = new Monom();
         List<Monom> DivideEquation = new List<Monom>();
         List<Monom> resultedDivideEquation = new List<Monom>();
+        List<Monom> remainder = new List<Monom>();
         resultedAddedEquation = new List<Monom>();
         float coeficientResult = new float();
         float exponentResult = new float();
@@ -132,16 +133,16 @@ public class PolynomOperations : MonoBehaviour
             
             if (resultedDivideEquation[0].exponent >= polynom2[0].exponent)
             {
-                DividePolynoms(resultedDivideEquation, polynom2, remainder);
+                return DividePolynoms(resultedDivideEquation, polynom2);
             }
             else
             {
                 remainder = resultedDivideEquation;
+                return remainder;
             }
         }
+        return null;
     }
-    //-----------------------------------------------------------------------------------------------------
-
 
     //searches in Monom list for every object with the same exponent then adds the coeficients acording to operation value
     //it recalls itself until there is no objects with the same exponent
@@ -236,15 +237,21 @@ public class PolynomOperations : MonoBehaviour
     //it shows the resulted polynom on UI
     public void OnDividePress()
     {
-        //print("Division of polynoms not yet available");
         ResultedPolynomEquation = new List<Monom>();
         var remainder = new List<Monom>();
 
-        DividePolynoms(polynom1.PolynomialEquation, polynom2.PolynomialEquation, remainder);
+        remainder = DividePolynoms(polynom1.PolynomialEquation, polynom2.PolynomialEquation);
 
         if (ResultedPolynomEquation.Count > 0)
         {
-            resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(ResultedPolynomEquation)) + " with remainder: " + string.Join(" ", Monom.PrintPolynom(remainder));
+            if (remainder != null)
+            {
+                resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(ResultedPolynomEquation)) + "\n with remainder: " + string.Join(" ", Monom.PrintPolynom(remainder));
+            }
+            else
+            {
+                resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(ResultedPolynomEquation));
+            }
         }
         else
         {
