@@ -42,9 +42,20 @@ public class ConvertToPolynom : MonoBehaviour
 
             for (int i = numbersArray.Length - 1; i >= 0; i--)
             {
-                PolynomialEquation.Add(Monom.CreateMonomObj(numbersArray[numbersArray.Length - 1 - i], i));
+                if (Monom.CreateMonomObj(numbersArray[numbersArray.Length - 1 - i], i) != null)
+                {
+                    PolynomialEquation.Add(Monom.CreateMonomObj(numbersArray[numbersArray.Length - 1 - i], i));
+                }
             }
-            resultText.text = string.Join(" ", Monom.PrintPolynom(PolynomialEquation));
+
+            if (PolynomialEquation.Count > 0)
+            {
+                resultText.text = string.Join(" ", Monom.PrintPolynom(PolynomialEquation));
+            }
+            else
+            {
+                resultText.text = "Polynom is 0.";
+            }
         }
     }
 }

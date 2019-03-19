@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class AdvancedOperations : MonoBehaviour
 {
-    [SerializeField]
+    [Tooltip("Put all of the Operation to Polynom buttons in this list "), SerializeField]
     private Button[] operationButtons;
-    [SerializeField]
+    [Tooltip("The inputfield with the value of X"), SerializeField]
     private InputField xValue;
     [SerializeField]
     private GameObject Graph;
@@ -92,7 +92,7 @@ public class AdvancedOperations : MonoBehaviour
 
         foreach (var monom in initialPolynomEquation)
         {
-            coeficientResult = monom.coefficient * monom .sign / (monom.exponent + 1);
+            coeficientResult = monom.coefficient * monom.sign / (monom.exponent + 1);
             exponentResult = monom.exponent + 1;
 
             resultedPolynomEquation.Add(Monom.CreateMonomObj(coeficientResult, exponentResult));
@@ -130,7 +130,10 @@ public class AdvancedOperations : MonoBehaviour
         }
 
         operationToPolynom.text = "Polynom with X value of " + XNumber.ToString() + " is: ";
-        resultedPolynom.text = result.ToString();
+        if (result != 0)
+        {
+            resultedPolynom.text = result.ToString();
+        }
 
     }
 
@@ -140,7 +143,17 @@ public class AdvancedOperations : MonoBehaviour
     {
         DerivatePolynom();
         operationToPolynom.text = "Polynom derivated is: ";
-        resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(resultedPolynomEquation));
+
+        //resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(resultedPolynomEquation));
+
+        if (resultedPolynomEquation.Count > 0)
+        {
+            resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(resultedPolynomEquation));
+        }
+        else
+        {
+            resultedPolynom.text = "Polynom is 0.";
+        }
     }
 
     //this function is called when the user presses the button Ierivate
@@ -149,7 +162,16 @@ public class AdvancedOperations : MonoBehaviour
     {
         IntegratePolynom();
         operationToPolynom.text = "Polynom integrated is: ";
-        resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(resultedPolynomEquation)) + " + C";
+        //resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(resultedPolynomEquation)) + " + C";
+
+        if (resultedPolynomEquation.Count > 0)
+        {
+            resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(resultedPolynomEquation)) + " + C";
+        }
+        else
+        {
+            resultedPolynom.text = "Polynom is 0.";
+        }
     }
 
     //this function is called when the user presses the button Graph
