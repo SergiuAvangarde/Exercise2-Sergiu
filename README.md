@@ -1,6 +1,6 @@
 # Polynomials - Sergiu
 
-This program takes two inputs from the user and converts them into polynomials of the type: a(i)*x^(n-i)
+This program takes two inputs from the user and converts them into polynomials of the type: sum of a(i)*x^(n-i)
 
 These two polynomials can be Added, Substracted or Multiplyed between them, or you could do operations like derivate, integrate, calculate the equation with the value of X from the user input, or draw a graph with the values of X from -10 to 10 on each of the polynom inputs or on the resulted polynom from add, substract or multiply operations.
 
