@@ -18,12 +18,15 @@ public class DrawGraph : MonoBehaviour
     //it is incrementing by 0.1 for a smoother curve on the graph
     public void CreateGraph()
     {
+        bool low = true;
+        bool high = true;
+
         pointsList = new List<Vector3>();
 
-        for (float i = -10; i < 10; i += 0.1f)
+        for (float i = -10; i <= 10; i += 0.1f)
         {
             float xSign = new float();
-            if(i < 0)
+            if (i < 0)
             {
                 xSign = -1;
             }
@@ -44,6 +47,7 @@ public class DrawGraph : MonoBehaviour
                     result += monom.coefficient * monom.sign * (Mathf.Pow(Mathf.Abs(i), monom.exponent) * xSign);
                 }
             }
+
             pointsList.Add(new Vector3(i, result, 0));
         }
 
