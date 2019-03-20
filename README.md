@@ -2,10 +2,10 @@
 
 This program takes two inputs from the user and converts them into polynomials of the type: sum of a(i)*x^(n-i)
 
-These two polynomials can be Added, Substracted or Multiplyed between them, or you could do operations like derivate, integrate, calculate the equation with the value of X from the user input, or draw a graph with the values of X from -10 to 10 on each of the polynom inputs or on the resulted polynom from add, substract or multiply operations.
+These two polynomials can be Added, Substracted, Multiplyed or Divided between them, or you could do operations like derivate, integrate, calculate the equation with the value of X, taken from user input, or draw a graph with the values of X from -10 to 10 on each of the polynom inputs or on the resulted polynom from add, substract, multiply or divide(without the remainder) operations.
 
 ## Scripts
-The program takes an array of numbers separated by spaces from the input field, the numbers can be separated by more than one space, and the numbers can have negative values. The array is compiled only when the user finished writing the numbers and pressed 'Enter'. This is done to avoid errors when writing negative numbers.
+The program takes an array of numbers separated by spaces from the input field, the numbers can be separated by more than one space, and the numbers can have negative values. The array is compiled only when the user has finished writing the numbers and pressed 'Enter'. This is done to avoid errors when writing negative numbers.
 
 To create the Polynom equation I use a Monom Class wich takes every number from the array and creates the coresponding Monom. Every monom has an coeficient wich is the number introduced, an exponent wich is calculated by the total of numbers introduced and the position where the number is located according to the other numbers, and a sign wich is taken from the input numbers. It creates a list with those monoms, then makes a string from that list and adds the coresponding signs from every monom to create the polynomial equation. The String is shown on the UI with the Text component from Unity.
 
@@ -17,6 +17,7 @@ If the input is 0 or null and the user tries make some operation with that value
 
 To apply the add, substract or multiply operations to the input polynoms, it adds the monom lists from every polynom to a new monom list, sorts that list in descending order acording to the exponent values, then aplies the coresponding operation.
 If the added list with the multiply result has 2 monoms with the same exponent value it recalls the add function until the result is corected.
+As for Divide function, the program compares the two polynoms and checks if the first exponent of the first polynom is greater or equal to the first exponent of the second polynom, if not the polynoms can't be divided. if they can be divided, the function takes the first Monom for division, puts it in the resulted list and calculates the remainder and puts it into a list of monoms. If the remainder can be divided again by the second polynom the function is recalled.
 
 For Derivate, Integrate and Set value of X operations it takes the coresponding input polynom or resulted polynom, and aplies the coresponding math operation.
 
@@ -27,5 +28,4 @@ To match the graph scale with the point coordinates I scaled the line in the ins
 ## Further improvements wich could be done:
 
 - I could make the posibility to select wich polynoms to add, substract or multiply, currently, the program can only operate on the input polynomyals, not the resulted polynomyals from derivate or integrate functions.
-- I could add an Divide funtion on the polynoms.
 - The UI can be improved to look nicer.
