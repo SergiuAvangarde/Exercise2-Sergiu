@@ -103,22 +103,22 @@ public class PolynomOperations : MonoBehaviour
         {
             coeficientResult = (polynom1[0].coefficient * polynom1[0].sign) / (polynom2[0].coefficient * polynom2[0].sign);
             exponentResult = polynom1[0].exponent - polynom2[0].exponent;
-            
+
             DivideMonom = Monom.CreateMonomObj(coeficientResult, exponentResult);
             ResultedPolynomEquation.Add(DivideMonom);
             Debug.Log("Divider coef: " + DivideMonom.coefficient + " exponent: " + DivideMonom.exponent);
-            
+
             foreach (var monom in polynom2)
             {
-                coeficientResult = monom.coefficient * monom.sign * (DivideMonom.coefficient* DivideMonom.sign);
+                coeficientResult = monom.coefficient * monom.sign * (DivideMonom.coefficient * DivideMonom.sign);
                 exponentResult = monom.exponent + DivideMonom.exponent;
-            
+
                 if (Monom.CreateMonomObj(coeficientResult, exponentResult) != null)
                 {
                     DivideEquation.Add(Monom.CreateMonomObj(coeficientResult, exponentResult));
                 }
             }
-            
+
             foreach (var monom in polynom1)
             {
                 resultedAddedEquation.Add(monom);
@@ -128,20 +128,31 @@ public class PolynomOperations : MonoBehaviour
                 resultedAddedEquation.Add(Monom.CreateMonomObj(monom.coefficient * -1, monom.exponent));
             }
             resultedAddedEquation.Sort((a, b) => -1 * a.exponent.CompareTo(b.exponent));
-            
+
             resultedDivideEquation = AddExponents(resultedAddedEquation);
-            
-            if (resultedDivideEquation[0].exponent >= polynom2[0].exponent)
+
+            if (resultedDivideEquation.Count != 0)
             {
-                return DividePolynoms(resultedDivideEquation, polynom2);
+                if (resultedDivideEquation[0].exponent >= polynom2[0].exponent)
+                {
+                    return DividePolynoms(resultedDivideEquation, polynom2);
+                }
+                else
+                {
+                    remainder = resultedDivideEquation;
+                    return remainder;
+                }
             }
             else
             {
-                remainder = resultedDivideEquation;
-                return remainder;
+                return null;
             }
         }
-        return null;
+        else
+        {
+            ResultedPolynomEquation = polynom2;
+            return polynom1;
+        }
     }
 
     //searches in Monom list for every object with the same exponent then adds the coeficients acording to operation value
