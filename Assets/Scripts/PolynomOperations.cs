@@ -265,22 +265,29 @@ public class PolynomOperations : MonoBehaviour
         ResultedPolynomEquation = new List<Monom>();
         var remainder = new List<Monom>();
 
-        remainder = DividePolynoms(polynom1.PolynomialEquation, polynom2.PolynomialEquation);
-
-        if (ResultedPolynomEquation.Count > 0)
+        if (polynom1.PolynomialEquation.Count == 0 || polynom2.PolynomialEquation.Count == 0)
         {
-            if (remainder != null)
-            {
-                resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation)) + "\n with remainder: " + string.Join(" ", MonomFactory.PrintPolynom(remainder));
-            }
-            else
-            {
-                resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation));
-            }
+            resultedPolynom.text = "Division by 0 is not posible";
         }
         else
         {
-            resultedPolynom.text = "Polynom is 0.";
+            remainder = DividePolynoms(polynom1.PolynomialEquation, polynom2.PolynomialEquation);
+
+            if (ResultedPolynomEquation.Count > 0)
+            {
+                if (remainder != null)
+                {
+                    resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation)) + "\n with remainder: " + string.Join(" ", MonomFactory.PrintPolynom(remainder));
+                }
+                else
+                {
+                    resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation));
+                }
+            }
+            else
+            {
+                resultedPolynom.text = "Polynom is 0.";
+            }
         }
     }
 }

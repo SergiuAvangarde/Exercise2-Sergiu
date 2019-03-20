@@ -134,6 +134,10 @@ public class AdvancedOperations : MonoBehaviour
         {
             resultedPolynom.text = result.ToString();
         }
+        else
+        {
+            resultedPolynom.text = " 0 ";
+        }
 
     }
 
