@@ -40,7 +40,7 @@ public class PolynomOperations : MonoBehaviour
     //Adds two polynom equations on a single Monom list 
     //If operation is false the second list is added with '-' sign for substract operation;
     //sorts it in descending order acording to exponent value
-    private void AddOrSub(bool operation)
+    private void AddOrSubPolynoms(bool operation)
     {
         resultedAddedEquation = new List<Monom>();
         ResultedPolynomEquation = new List<Monom>();
@@ -57,7 +57,14 @@ public class PolynomOperations : MonoBehaviour
             }
             else
             {
-                resultedAddedEquation.Add(Monom.CreateMonomObj(monomFrom2.coefficient * -1, monomFrom2.exponent));
+                if (monomFrom2.sign == -1)
+                {
+                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monomFrom2.coefficient, monomFrom2.exponent));
+                }
+                else
+                {
+                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monomFrom2.coefficient * -1, monomFrom2.exponent));
+                }
             }
         }
 
@@ -80,7 +87,7 @@ public class PolynomOperations : MonoBehaviour
                 coeficientResult = (polynom1.PolynomialEquation[i].coefficient * polynom1.PolynomialEquation[i].sign) * (polynom2.PolynomialEquation[j].coefficient * polynom2.PolynomialEquation[j].sign);
                 exponentResult = polynom1.PolynomialEquation[i].exponent + polynom2.PolynomialEquation[j].exponent;
 
-                resultedAddedEquation.Add(Monom.CreateMonomObj(coeficientResult, exponentResult));
+                resultedAddedEquation.Add(MonomFactory.CreateMonomObj(coeficientResult, exponentResult));
             }
         }
         resultedAddedEquation.Sort((a, b) => -1 * a.exponent.CompareTo(b.exponent));
@@ -104,18 +111,17 @@ public class PolynomOperations : MonoBehaviour
             coeficientResult = (polynom1[0].coefficient * polynom1[0].sign) / (polynom2[0].coefficient * polynom2[0].sign);
             exponentResult = polynom1[0].exponent - polynom2[0].exponent;
 
-            DivideMonom = Monom.CreateMonomObj(coeficientResult, exponentResult);
+            DivideMonom = MonomFactory.CreateMonomObj(coeficientResult, exponentResult);
             ResultedPolynomEquation.Add(DivideMonom);
-            Debug.Log("Divider coef: " + DivideMonom.coefficient + " exponent: " + DivideMonom.exponent);
 
             foreach (var monom in polynom2)
             {
                 coeficientResult = monom.coefficient * monom.sign * (DivideMonom.coefficient * DivideMonom.sign);
                 exponentResult = monom.exponent + DivideMonom.exponent;
 
-                if (Monom.CreateMonomObj(coeficientResult, exponentResult) != null)
+                if (MonomFactory.CreateMonomObj(coeficientResult, exponentResult) != null)
                 {
-                    DivideEquation.Add(Monom.CreateMonomObj(coeficientResult, exponentResult));
+                    DivideEquation.Add(MonomFactory.CreateMonomObj(coeficientResult, exponentResult));
                 }
             }
 
@@ -125,14 +131,22 @@ public class PolynomOperations : MonoBehaviour
             }
             foreach (var monom in DivideEquation)
             {
-                resultedAddedEquation.Add(Monom.CreateMonomObj(monom.coefficient * -1, monom.exponent));
+                if (monom.sign == -1)
+                {
+                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monom.coefficient, monom.exponent));
+                }
+                else
+                {
+                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monom.coefficient * -1, monom.exponent));
+                }
             }
             resultedAddedEquation.Sort((a, b) => -1 * a.exponent.CompareTo(b.exponent));
 
-            resultedDivideEquation = AddExponents(resultedAddedEquation);
+            resultedDivideEquation = AddEquation(resultedAddedEquation);
 
-            if (resultedDivideEquation.Count != 0)
+            if (resultedDivideEquation.Count > 0)
             {
+                //counter is for debugging
                 if (resultedDivideEquation[0].exponent >= polynom2[0].exponent)
                 {
                     return DividePolynoms(resultedDivideEquation, polynom2);
@@ -157,39 +171,39 @@ public class PolynomOperations : MonoBehaviour
 
     //searches in Monom list for every object with the same exponent then adds the coeficients acording to operation value
     //it recalls itself until there is no objects with the same exponent
-    private List<Monom> AddExponents(List<Monom> first)
+    private List<Monom> AddEquation(List<Monom> firstPolynom)
     {
-        List<Monom> second = new List<Monom>();
+        List<Monom> secondPolynom = new List<Monom>();
         float result = new float();
 
-        for (int i = 0; i <= first.Count - 1; i++)
+        for (int i = 0; i <= firstPolynom.Count - 1; i++)
         {
-            if (((i + 1) <= first.Count - 1) && (first[i].exponent == first[i + 1].exponent))
+            if (((i + 1) <= firstPolynom.Count - 1) && (firstPolynom[i].exponent == firstPolynom[i + 1].exponent))
             {
-                result = (first[i].coefficient * first[i].sign) + (first[i + 1].coefficient * first[i + 1].sign);
+                result = (firstPolynom[i].coefficient * firstPolynom[i].sign) + (firstPolynom[i + 1].coefficient * firstPolynom[i + 1].sign);
 
                 if (result != 0)
                 {
-                    second.Add(Monom.CreateMonomObj(result, first[i].exponent));
+                    secondPolynom.Add(MonomFactory.CreateMonomObj(result, firstPolynom[i].exponent));
                 }
                 i++;
             }
             else
             {
-                if (first[i].MonomString() != null)
+                if (firstPolynom[i].MonomString() != null)
                 {
-                    second.Add(first[i]);
+                    secondPolynom.Add(firstPolynom[i]);
                 }
             }
         }
 
-        if (second.Count == first.Count)
+        if (secondPolynom.Count == firstPolynom.Count)
         {
-            return second;
+            return secondPolynom;
         }
         else
         {
-            return AddExponents(second);
+            return AddEquation(secondPolynom);
         }
     }
 
@@ -197,12 +211,12 @@ public class PolynomOperations : MonoBehaviour
     //it shows the resulted polynom on UI
     public void OnAddPress()
     {
-        AddOrSub(true);
-        ResultedPolynomEquation = AddExponents(resultedAddedEquation);
+        AddOrSubPolynoms(true);
+        ResultedPolynomEquation = AddEquation(resultedAddedEquation);
 
         if (ResultedPolynomEquation.Count > 0)
         {
-            resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(ResultedPolynomEquation));
+            resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation));
         }
         else
         {
@@ -214,12 +228,12 @@ public class PolynomOperations : MonoBehaviour
     //it shows the resulted polynom on UI
     public void OnSubstractPress()
     {
-        AddOrSub(false);
-        ResultedPolynomEquation = AddExponents(resultedAddedEquation);
+        AddOrSubPolynoms(false);
+        ResultedPolynomEquation = AddEquation(resultedAddedEquation);
 
         if (ResultedPolynomEquation.Count > 0)
         {
-            resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(ResultedPolynomEquation));
+            resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation));
         }
         else
         {
@@ -232,11 +246,11 @@ public class PolynomOperations : MonoBehaviour
     public void OnMultiplyPress()
     {
         MultiplyArrays();
-        ResultedPolynomEquation = AddExponents(resultedAddedEquation);
+        ResultedPolynomEquation = AddEquation(resultedAddedEquation);
 
         if (ResultedPolynomEquation.Count > 0)
         {
-            resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(ResultedPolynomEquation));
+            resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation));
         }
         else
         {
@@ -257,11 +271,11 @@ public class PolynomOperations : MonoBehaviour
         {
             if (remainder != null)
             {
-                resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(ResultedPolynomEquation)) + "\n with remainder: " + string.Join(" ", Monom.PrintPolynom(remainder));
+                resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation)) + "\n with remainder: " + string.Join(" ", MonomFactory.PrintPolynom(remainder));
             }
             else
             {
-                resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(ResultedPolynomEquation));
+                resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation));
             }
         }
         else

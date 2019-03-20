@@ -77,7 +77,7 @@ public class AdvancedOperations : MonoBehaviour
                 coeficientResult = monom.coefficient * monom.sign * monom.exponent;
                 exponentResult = monom.exponent - 1;
 
-                resultedPolynomEquation.Add(Monom.CreateMonomObj(coeficientResult, exponentResult));
+                resultedPolynomEquation.Add(MonomFactory.CreateMonomObj(coeficientResult, exponentResult));
             }
         }
     }
@@ -95,7 +95,7 @@ public class AdvancedOperations : MonoBehaviour
             coeficientResult = monom.coefficient * monom.sign / (monom.exponent + 1);
             exponentResult = monom.exponent + 1;
 
-            resultedPolynomEquation.Add(Monom.CreateMonomObj(coeficientResult, exponentResult));
+            resultedPolynomEquation.Add(MonomFactory.CreateMonomObj(coeficientResult, exponentResult));
         }
     }
 
@@ -148,7 +148,7 @@ public class AdvancedOperations : MonoBehaviour
 
         if (resultedPolynomEquation.Count > 0)
         {
-            resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(resultedPolynomEquation));
+            resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(resultedPolynomEquation));
         }
         else
         {
@@ -166,7 +166,7 @@ public class AdvancedOperations : MonoBehaviour
 
         if (resultedPolynomEquation.Count > 0)
         {
-            resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(resultedPolynomEquation)) + " + C";
+            resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(resultedPolynomEquation)) + " + C";
         }
         else
         {
