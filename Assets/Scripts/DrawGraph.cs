@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DrawGraph : MonoBehaviour
 {
-    public List<Monom> PolynomEquation { get; set; }
+    public List<Monom> PolynomialEquation { get; set; }
     private List<Vector3> pointsList;
     private LineRenderer line;
 
@@ -33,7 +33,7 @@ public class DrawGraph : MonoBehaviour
             }
 
             float result = new float();
-            foreach (var monom in PolynomEquation)
+            foreach (var monom in PolynomialEquation)
             {
                 if (monom.Exponent % 2 == 0)
                 {
@@ -45,10 +45,11 @@ public class DrawGraph : MonoBehaviour
                 }
             }
 
-            if(result >= -10.5f && result <= 10.5f)
-            {
+            //this comented section should not let the graph go outside the bounds of the background
+            //if(result >= -10.5f && result <= 10.5f)
+            //{
                 pointsList.Add(new Vector3(i, result, 0));
-            }
+            //}
         }
 
         line.positionCount = pointsList.Count;

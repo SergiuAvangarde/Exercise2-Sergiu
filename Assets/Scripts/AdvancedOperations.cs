@@ -12,39 +12,33 @@ public class AdvancedOperations : MonoBehaviour
     [SerializeField]
     private GameObject graph;
     [SerializeField]
-    private Text operationToPolynom;
+    private Text operationToPolynomial;
     [SerializeField]
-    private Text resultedPolynom;
+    private Text resultedPolynomial;
     [Tooltip("This should be left null if the script is used with resulted polynom"), SerializeField]
-    private ConvertToPolynom polynomInput;
+    private ConvertToPolynom polynomialInput;
     [Tooltip("This should be left null if the script is used with polynom 1 or 2"), SerializeField]
-    private PolynomOperations resultedPolynomInput;
+    private PolynomOperations resultedPolynomialInput;
     [SerializeField]
-    private DrawGraph graphPolynom;
+    private DrawGraph graphPolynomial;
 
-    private List<Monom> initialPolynomEquation;
-    private List<Monom> resultedPolynomEquation;
-
-    //initialize the initial polynom equation wich will be used for operations
-    private void Start()
-    {
-        initialPolynomEquation = new List<Monom>();
-    }
+    private List<Monom> initialPolynomialEquation = new List<Monom>();
+    private List<Monom> resultedPolynomialEquation;
 
     //checks if the initial equation is one of the polynoms from input field or the resulted polynom
     //if any of the equations are null, makes the buttons inactive
     private void Update()
     {
-        if (polynomInput != null)
+        if (polynomialInput != null)
         {
-            initialPolynomEquation = polynomInput.PolynomialEquation;
+            initialPolynomialEquation = polynomialInput.PolynomialEquation;
         }
-        else if (resultedPolynomInput != null)
+        else if (resultedPolynomialInput != null)
         {
-            initialPolynomEquation = resultedPolynomInput.ResultedPolynomEquation;
+            initialPolynomialEquation = resultedPolynomialInput.ResultedPolynomialEquation;
         }
 
-        if (initialPolynomEquation == null)
+        if (initialPolynomialEquation == null)
         {
             foreach (var Button in operationButtons)
             {
@@ -62,40 +56,40 @@ public class AdvancedOperations : MonoBehaviour
         }
     }
 
-    //checks for every monom in equation, and derivates it
+    //checks for every monom in equation, and applies the Derivative operation
     //the result is added to the resulted monoms list
-    private void DerivatePolynom()
+    private void DerivativePolynomial()
     {
-        resultedPolynomEquation = new List<Monom>();
+        resultedPolynomialEquation = new List<Monom>();
         float coeficientResult = new float();
         float exponentResult = new float();
 
-        foreach (var monom in initialPolynomEquation)
+        foreach (var monom in initialPolynomialEquation)
         {
             if (monom.Exponent > 0)
             {
                 coeficientResult = monom.Coefficient * monom.Sign * monom.Exponent;
                 exponentResult = monom.Exponent - 1;
 
-                resultedPolynomEquation.Add(MonomFactory.CreateMonomObj(coeficientResult, exponentResult));
+                resultedPolynomialEquation.Add(MonomUtils.CreateMonomObj(coeficientResult, exponentResult));
             }
         }
     }
 
     //checks for every monom in equation, and integrates it
     //the result is added to the resulted monoms list
-    private void IntegratePolynom()
+    private void IntegratePolynomial()
     {
-        resultedPolynomEquation = new List<Monom>();
+        resultedPolynomialEquation = new List<Monom>();
         float coeficientResult = new float();
         float exponentResult = new float();
 
-        foreach (var monom in initialPolynomEquation)
+        foreach (var monom in initialPolynomialEquation)
         {
             coeficientResult = monom.Coefficient * monom.Sign / (monom.Exponent + 1);
             exponentResult = monom.Exponent + 1;
 
-            resultedPolynomEquation.Add(MonomFactory.CreateMonomObj(coeficientResult, exponentResult));
+            resultedPolynomialEquation.Add(MonomUtils.CreateMonomObj(coeficientResult, exponentResult));
         }
     }
 
@@ -117,7 +111,7 @@ public class AdvancedOperations : MonoBehaviour
             xSign = 1;
         }
 
-        foreach (var monom in initialPolynomEquation)
+        foreach (var monom in initialPolynomialEquation)
         {
             if (monom.Exponent % 2 == 0)
             {
@@ -129,52 +123,49 @@ public class AdvancedOperations : MonoBehaviour
             }
         }
 
-        operationToPolynom.text = "Polynom with X value of " + XNumber.ToString() + " is: ";
+        operationToPolynomial.text = "Polynom with X value of " + XNumber.ToString() + " is: ";
         if (result != 0)
         {
-            resultedPolynom.text = result.ToString();
+            resultedPolynomial.text = result.ToString();
         }
         else
         {
-            resultedPolynom.text = " 0 ";
+            resultedPolynomial.text = " 0 ";
         }
 
     }
 
-    //this function is called when the user presses the button Derivate
-    //it calls the Derivate funtion above and prints the result to interface
-    public void OnDerivatePress()
+    //this function is called when the user presses the button Derivative
+    //it calls the Derivative funtion above and prints the result to interface
+    public void OnDerivativePress()
     {
-        DerivatePolynom();
-        operationToPolynom.text = "Polynom derivated is: ";
+        DerivativePolynomial();
+        operationToPolynomial.text = "Derivative polynomial is: ";
 
-        //resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(resultedPolynomEquation));
-
-        if (resultedPolynomEquation.Count > 0)
+        if (resultedPolynomialEquation.Count > 0)
         {
-            resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(resultedPolynomEquation));
+            resultedPolynomial.text = string.Join(" ", MonomUtils.PrintPolynomial(resultedPolynomialEquation));
         }
         else
         {
-            resultedPolynom.text = "Polynom is 0.";
+            resultedPolynomial.text = "Polynomial is 0.";
         }
     }
 
-    //this function is called when the user presses the button Ierivate
+    //this function is called when the user presses the button Integrate
     //it calls the Integrate funtion above and prints the result to interface
     public void OnIntegratePress()
     {
-        IntegratePolynom();
-        operationToPolynom.text = "Polynom integrated is: ";
-        //resultedPolynom.text = string.Join(" ", Monom.PrintPolynom(resultedPolynomEquation)) + " + C";
+        IntegratePolynomial();
+        operationToPolynomial.text = "Polynomial integrated is: ";
 
-        if (resultedPolynomEquation.Count > 0)
+        if (resultedPolynomialEquation.Count > 0)
         {
-            resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(resultedPolynomEquation)) + " + C";
+            resultedPolynomial.text = string.Join(" ", MonomUtils.PrintPolynomial(resultedPolynomialEquation)) + " + C";
         }
         else
         {
-            resultedPolynom.text = "Polynom is 0.";
+            resultedPolynomial.text = "Polynomial is 0.";
         }
     }
 
@@ -183,8 +174,8 @@ public class AdvancedOperations : MonoBehaviour
     public void OnGraphPress()
     {
         graph.SetActive(true);
-        graphPolynom.PolynomEquation = new List<Monom>();
-        graphPolynom.PolynomEquation = initialPolynomEquation;
-        graphPolynom.CreateGraph();
+        graphPolynomial.PolynomialEquation = new List<Monom>();
+        graphPolynomial.PolynomialEquation = initialPolynomialEquation;
+        graphPolynomial.CreateGraph();
     }
 }

@@ -5,23 +5,23 @@ using UnityEngine.UI;
 
 public class PolynomOperations : MonoBehaviour
 {
-    public List<Monom> ResultedPolynomEquation { get; set; }
+    public List<Monom> ResultedPolynomialEquation { get; set; }
 
     [Tooltip("Put all of the Operation Buttons in this list "), SerializeField]
     private Button[] operationButtons;
     [SerializeField]
-    private Text resultedPolynom;
+    private Text resultedPolynomial;
     [SerializeField]
-    private ConvertToPolynom polynom1;
+    private ConvertToPolynom polynomial1Input;
     [SerializeField]
-    private ConvertToPolynom polynom2;
+    private ConvertToPolynom polynomial2Input;
 
     private List<Monom> resultedAddedEquation;
 
     //check if any of the equations are null, and if so, it makes the buttons inactive 
     private void Update()
     {
-        if (polynom1.PolynomialEquation == null || polynom2.PolynomialEquation == null)
+        if (polynomial1Input.PolynomialEquation == null || polynomial2Input.PolynomialEquation == null)
         {
             foreach (var Button in operationButtons)
             {
@@ -37,19 +37,19 @@ public class PolynomOperations : MonoBehaviour
         }
     }
 
-    //Adds two polynom equations on a single Monom list 
+    //Adds two polynomial equations on a single Monom list 
     //If operation is false the second list is added with '-' sign for substract operation;
     //sorts it in descending order acording to exponent value
-    private void AddOrSubPolynoms(bool operation)
+    private void AddOrSubPolynomials(bool operation)
     {
         resultedAddedEquation = new List<Monom>();
-        ResultedPolynomEquation = new List<Monom>();
+        ResultedPolynomialEquation = new List<Monom>();
 
-        foreach (Monom monomFrom1 in polynom1.PolynomialEquation)
+        foreach (Monom monomFrom1 in polynomial1Input.PolynomialEquation)
         {
             resultedAddedEquation.Add(monomFrom1);
         }
-        foreach (Monom monomFrom2 in polynom2.PolynomialEquation)
+        foreach (Monom monomFrom2 in polynomial2Input.PolynomialEquation)
         {
             if (operation)
             {
@@ -59,11 +59,11 @@ public class PolynomOperations : MonoBehaviour
             {
                 if (monomFrom2.Sign == -1)
                 {
-                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monomFrom2.Coefficient, monomFrom2.Exponent));
+                    resultedAddedEquation.Add(MonomUtils.CreateMonomObj(monomFrom2.Coefficient, monomFrom2.Exponent));
                 }
                 else
                 {
-                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monomFrom2.Coefficient * -1, monomFrom2.Exponent));
+                    resultedAddedEquation.Add(MonomUtils.CreateMonomObj(monomFrom2.Coefficient * -1, monomFrom2.Exponent));
                 }
             }
         }
@@ -76,18 +76,18 @@ public class PolynomOperations : MonoBehaviour
     private void MultiplyArrays()
     {
         resultedAddedEquation = new List<Monom>();
-        ResultedPolynomEquation = new List<Monom>();
+        ResultedPolynomialEquation = new List<Monom>();
         float coeficientResult = new float();
         float exponentResult = new float();
 
-        for (int i = 0; i <= polynom1.PolynomialEquation.Count - 1; i++)
+        for (int i = 0; i <= polynomial1Input.PolynomialEquation.Count - 1; i++)
         {
-            for (int j = 0; j <= polynom2.PolynomialEquation.Count - 1; j++)
+            for (int j = 0; j <= polynomial2Input.PolynomialEquation.Count - 1; j++)
             {
-                coeficientResult = (polynom1.PolynomialEquation[i].Coefficient * polynom1.PolynomialEquation[i].Sign) * (polynom2.PolynomialEquation[j].Coefficient * polynom2.PolynomialEquation[j].Sign);
-                exponentResult = polynom1.PolynomialEquation[i].Exponent + polynom2.PolynomialEquation[j].Exponent;
+                coeficientResult = (polynomial1Input.PolynomialEquation[i].Coefficient * polynomial1Input.PolynomialEquation[i].Sign) * (polynomial2Input.PolynomialEquation[j].Coefficient * polynomial2Input.PolynomialEquation[j].Sign);
+                exponentResult = polynomial1Input.PolynomialEquation[i].Exponent + polynomial2Input.PolynomialEquation[j].Exponent;
 
-                resultedAddedEquation.Add(MonomFactory.CreateMonomObj(coeficientResult, exponentResult));
+                resultedAddedEquation.Add(MonomUtils.CreateMonomObj(coeficientResult, exponentResult));
             }
         }
         resultedAddedEquation.Sort((a, b) => -1 * a.Exponent.CompareTo(b.Exponent));
@@ -96,7 +96,7 @@ public class PolynomOperations : MonoBehaviour
     //this function takes two polynoms, checks the first coeficient of every equation and divides them if they can be divided
     //the function is recalled until the polynoms can't be divided anymore
     //and the function returns a remainder if there is any
-    private List<Monom> DividePolynoms(List<Monom> polynom1, List<Monom> polynom2)
+    private List<Monom> DividePolynomials(List<Monom> polynomial1, List<Monom> polynomial2)
     {
         Monom DivideMonom = new Monom();
         List<Monom> DivideEquation = new List<Monom>();
@@ -106,26 +106,26 @@ public class PolynomOperations : MonoBehaviour
         float coeficientResult = new float();
         float exponentResult = new float();
 
-        if (polynom1[0].Exponent >= polynom2[0].Exponent)
+        if (polynomial1[0].Exponent >= polynomial2[0].Exponent)
         {
-            coeficientResult = (polynom1[0].Coefficient * polynom1[0].Sign) / (polynom2[0].Coefficient * polynom2[0].Sign);
-            exponentResult = polynom1[0].Exponent - polynom2[0].Exponent;
+            coeficientResult = (polynomial1[0].Coefficient * polynomial1[0].Sign) / (polynomial2[0].Coefficient * polynomial2[0].Sign);
+            exponentResult = polynomial1[0].Exponent - polynomial2[0].Exponent;
 
-            DivideMonom = MonomFactory.CreateMonomObj(coeficientResult, exponentResult);
-            ResultedPolynomEquation.Add(DivideMonom);
+            DivideMonom = MonomUtils.CreateMonomObj(coeficientResult, exponentResult);
+            ResultedPolynomialEquation.Add(DivideMonom);
 
-            foreach (var monom in polynom2)
+            foreach (var monom in polynomial2)
             {
                 coeficientResult = monom.Coefficient * monom.Sign * (DivideMonom.Coefficient * DivideMonom.Sign);
                 exponentResult = monom.Exponent + DivideMonom.Exponent;
 
-                if (MonomFactory.CreateMonomObj(coeficientResult, exponentResult) != null)
+                if (MonomUtils.CreateMonomObj(coeficientResult, exponentResult) != null)
                 {
-                    DivideEquation.Add(MonomFactory.CreateMonomObj(coeficientResult, exponentResult));
+                    DivideEquation.Add(MonomUtils.CreateMonomObj(coeficientResult, exponentResult));
                 }
             }
 
-            foreach (var monom in polynom1)
+            foreach (var monom in polynomial1)
             {
                 resultedAddedEquation.Add(monom);
             }
@@ -133,11 +133,11 @@ public class PolynomOperations : MonoBehaviour
             {
                 if (monom.Sign == -1)
                 {
-                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monom.Coefficient, monom.Exponent));
+                    resultedAddedEquation.Add(MonomUtils.CreateMonomObj(monom.Coefficient, monom.Exponent));
                 }
                 else
                 {
-                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monom.Coefficient * -1, monom.Exponent));
+                    resultedAddedEquation.Add(MonomUtils.CreateMonomObj(monom.Coefficient * -1, monom.Exponent));
                 }
             }
             resultedAddedEquation.Sort((a, b) => -1 * a.Exponent.CompareTo(b.Exponent));
@@ -147,9 +147,9 @@ public class PolynomOperations : MonoBehaviour
             if (resultedDivideEquation.Count > 0)
             {
                 //counter is for debugging
-                if (resultedDivideEquation[0].Exponent >= polynom2[0].Exponent)
+                if (resultedDivideEquation[0].Exponent >= polynomial2[0].Exponent)
                 {
-                    return DividePolynoms(resultedDivideEquation, polynom2);
+                    return DividePolynomials(resultedDivideEquation, polynomial2);
                 }
                 else
                 {
@@ -164,46 +164,46 @@ public class PolynomOperations : MonoBehaviour
         }
         else
         {
-            ResultedPolynomEquation = polynom2;
-            return polynom1;
+            ResultedPolynomialEquation = polynomial2;
+            return polynomial1;
         }
     }
 
     //searches in Monom list for every object with the same exponent then adds the coeficients acording to operation value
     //it recalls itself until there is no objects with the same exponent
-    private List<Monom> AddEquation(List<Monom> firstPolynom)
+    private List<Monom> AddEquation(List<Monom> firstPolynomial)
     {
-        List<Monom> secondPolynom = new List<Monom>();
+        List<Monom> secondPolynomial = new List<Monom>();
         float result = new float();
 
-        for (int i = 0; i <= firstPolynom.Count - 1; i++)
+        for (int i = 0; i <= firstPolynomial.Count - 1; i++)
         {
-            if (((i + 1) <= firstPolynom.Count - 1) && (firstPolynom[i].Exponent == firstPolynom[i + 1].Exponent))
+            if (((i + 1) <= firstPolynomial.Count - 1) && (firstPolynomial[i].Exponent == firstPolynomial[i + 1].Exponent))
             {
-                result = (firstPolynom[i].Coefficient * firstPolynom[i].Sign) + (firstPolynom[i + 1].Coefficient * firstPolynom[i + 1].Sign);
+                result = (firstPolynomial[i].Coefficient * firstPolynomial[i].Sign) + (firstPolynomial[i + 1].Coefficient * firstPolynomial[i + 1].Sign);
 
                 if (result != 0)
                 {
-                    secondPolynom.Add(MonomFactory.CreateMonomObj(result, firstPolynom[i].Exponent));
+                    secondPolynomial.Add(MonomUtils.CreateMonomObj(result, firstPolynomial[i].Exponent));
                 }
                 i++;
             }
             else
             {
-                if (firstPolynom[i].MonomString() != null)
+                if (firstPolynomial[i].MonomString() != null)
                 {
-                    secondPolynom.Add(firstPolynom[i]);
+                    secondPolynomial.Add(firstPolynomial[i]);
                 }
             }
         }
 
-        if (secondPolynom.Count == firstPolynom.Count)
+        if (secondPolynomial.Count == firstPolynomial.Count)
         {
-            return secondPolynom;
+            return secondPolynomial;
         }
         else
         {
-            return AddEquation(secondPolynom);
+            return AddEquation(secondPolynomial);
         }
     }
 
@@ -211,16 +211,16 @@ public class PolynomOperations : MonoBehaviour
     //it shows the resulted polynom on UI
     public void OnAddPress()
     {
-        AddOrSubPolynoms(true);
-        ResultedPolynomEquation = AddEquation(resultedAddedEquation);
+        AddOrSubPolynomials(true);
+        ResultedPolynomialEquation = AddEquation(resultedAddedEquation);
 
-        if (ResultedPolynomEquation.Count > 0)
+        if (ResultedPolynomialEquation.Count > 0)
         {
-            resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation));
+            resultedPolynomial.text = string.Join(" ", MonomUtils.PrintPolynomial(ResultedPolynomialEquation));
         }
         else
         {
-            resultedPolynom.text = "Polynom is 0.";
+            resultedPolynomial.text = "Polynom is 0.";
         }
     }
 
@@ -228,16 +228,16 @@ public class PolynomOperations : MonoBehaviour
     //it shows the resulted polynom on UI
     public void OnSubstractPress()
     {
-        AddOrSubPolynoms(false);
-        ResultedPolynomEquation = AddEquation(resultedAddedEquation);
+        AddOrSubPolynomials(false);
+        ResultedPolynomialEquation = AddEquation(resultedAddedEquation);
 
-        if (ResultedPolynomEquation.Count > 0)
+        if (ResultedPolynomialEquation.Count > 0)
         {
-            resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation));
+            resultedPolynomial.text = string.Join(" ", MonomUtils.PrintPolynomial(ResultedPolynomialEquation));
         }
         else
         {
-            resultedPolynom.text = "Polynom is 0.";
+            resultedPolynomial.text = "Polynom is 0.";
         }
     }
 
@@ -246,15 +246,15 @@ public class PolynomOperations : MonoBehaviour
     public void OnMultiplyPress()
     {
         MultiplyArrays();
-        ResultedPolynomEquation = AddEquation(resultedAddedEquation);
+        ResultedPolynomialEquation = AddEquation(resultedAddedEquation);
 
-        if (ResultedPolynomEquation.Count > 0)
+        if (ResultedPolynomialEquation.Count > 0)
         {
-            resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation));
+            resultedPolynomial.text = string.Join(" ", MonomUtils.PrintPolynomial(ResultedPolynomialEquation));
         }
         else
         {
-            resultedPolynom.text = "Polynom is 0.";
+            resultedPolynomial.text = "Polynom is 0.";
         }
     }
 
@@ -262,31 +262,31 @@ public class PolynomOperations : MonoBehaviour
     //it shows the resulted polynom on UI
     public void OnDividePress()
     {
-        ResultedPolynomEquation = new List<Monom>();
+        ResultedPolynomialEquation = new List<Monom>();
         var remainder = new List<Monom>();
 
-        if (polynom1.PolynomialEquation.Count == 0 || polynom2.PolynomialEquation.Count == 0)
+        if (polynomial1Input.PolynomialEquation.Count == 0 || polynomial2Input.PolynomialEquation.Count == 0)
         {
-            resultedPolynom.text = "Division by 0 is not posible";
+            resultedPolynomial.text = "Division by 0 is not posible";
         }
         else
         {
-            remainder = DividePolynoms(polynom1.PolynomialEquation, polynom2.PolynomialEquation);
+            remainder = DividePolynomials(polynomial1Input.PolynomialEquation, polynomial2Input.PolynomialEquation);
 
-            if (ResultedPolynomEquation.Count > 0)
+            if (ResultedPolynomialEquation.Count > 0)
             {
                 if (remainder != null)
                 {
-                    resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation)) + "\n with remainder: " + string.Join(" ", MonomFactory.PrintPolynom(remainder));
+                    resultedPolynomial.text = string.Join(" ", MonomUtils.PrintPolynomial(ResultedPolynomialEquation)) + "\n with remainder: " + string.Join(" ", MonomUtils.PrintPolynomial(remainder));
                 }
                 else
                 {
-                    resultedPolynom.text = string.Join(" ", MonomFactory.PrintPolynom(ResultedPolynomEquation));
+                    resultedPolynomial.text = string.Join(" ", MonomUtils.PrintPolynomial(ResultedPolynomialEquation));
                 }
             }
             else
             {
-                resultedPolynom.text = "Polynom is 0.";
+                resultedPolynomial.text = "Polynom is 0.";
             }
         }
     }

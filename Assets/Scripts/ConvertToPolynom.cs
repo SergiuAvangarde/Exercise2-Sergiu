@@ -24,11 +24,10 @@ public class ConvertToPolynom : MonoBehaviour
     //Splits the string from the input field at every space and adds the elements to a float array
     //converts the values from the array to a list of Monoms
     //prints the polynom to a text field
-    public void numbersToPolynom()
+    public void NumbersToPolynom()
     {
-        numbersString = null;
         PolynomialEquation = new List<Monom>();
-
+        numbersString = null;
         numbersString = inputNumbers.text.Trim().Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
         if (numbersString != null)
@@ -42,15 +41,15 @@ public class ConvertToPolynom : MonoBehaviour
 
             for (int i = numbersArray.Length - 1; i >= 0; i--)
             {
-                if (MonomFactory.CreateMonomObj(numbersArray[numbersArray.Length - 1 - i], i) != null)
+                if (MonomUtils.CreateMonomObj(numbersArray[numbersArray.Length - 1 - i], i) != null)
                 {
-                    PolynomialEquation.Add(MonomFactory.CreateMonomObj(numbersArray[numbersArray.Length - 1 - i], i));
+                    PolynomialEquation.Add(MonomUtils.CreateMonomObj(numbersArray[numbersArray.Length - 1 - i], i));
                 }
             }
 
             if (PolynomialEquation.Count > 0)
             {
-                resultText.text = string.Join(" ", MonomFactory.PrintPolynom(PolynomialEquation));
+                resultText.text = string.Join(" ", MonomUtils.PrintPolynomial(PolynomialEquation));
             }
             else
             {

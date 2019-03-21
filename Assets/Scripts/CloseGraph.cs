@@ -12,6 +12,7 @@ public class CloseGraph : MonoBehaviour, IPointerClickHandler
         graphPanel = this.gameObject;
     }
 
+    //when the user clicks somewhere on the graph interface the gameobjects is set inactive.
     public void OnPointerClick(PointerEventData eventData)
     {
         graphPanel.SetActive(false);

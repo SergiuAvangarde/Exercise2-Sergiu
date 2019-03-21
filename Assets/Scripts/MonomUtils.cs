@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonomFactory
+public class MonomUtils
 {
     //this function creates an Object of class Monom wich will be added to a list of monoms
     public static Monom CreateMonomObj(float coef, float exp)
@@ -30,27 +30,27 @@ public class MonomFactory
     }
 
     //this function takes a list of Monoms and converts them to an Polynom equation string adding the coresponding signs
-    public static List<string> PrintPolynom(List<Monom> polynomList)
+    public static List<string> PrintPolynomial(List<Monom> polynomList)
     {
-        List<string> ResultedPolynomialString = new List<string>();
+        List<string> resultedPolynomialString = new List<string>();
         int i = 0;
         foreach (var monom in polynomList)
         {
             if (i == 0 && monom.Sign == +1)
             {
-                ResultedPolynomialString.Add(monom.MonomString());
+                resultedPolynomialString.Add(monom.MonomString());
                 i++;
             }
             else if (monom.Sign == 1)
             {
-                ResultedPolynomialString.Add("+ " + monom.MonomString());
+                resultedPolynomialString.Add("+ " + monom.MonomString());
             }
             else if (monom.Sign == -1)
             {
-                ResultedPolynomialString.Add("- " + monom.MonomString());
+                resultedPolynomialString.Add("- " + monom.MonomString());
             }
             i++;
         }
-        return ResultedPolynomialString;
+        return resultedPolynomialString;
     }
 }

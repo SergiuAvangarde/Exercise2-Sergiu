@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 209409855}
   - component: {fileID: 209409854}
   m_Layer: 5
-  m_Name: Derivate
+  m_Name: Derivative
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -578,7 +578,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 271084781}
-        m_MethodName: OnDerivatePress
+        m_MethodName: OnDerivativePress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -937,11 +937,11 @@ MonoBehaviour:
   - {fileID: 1874898025}
   xValue: {fileID: 239659615}
   graph: {fileID: 757531978}
-  operationToPolynom: {fileID: 1496007246}
-  resultedPolynom: {fileID: 1506256691}
-  polynomInput: {fileID: 0}
-  resultedPolynomInput: {fileID: 1958922893}
-  graphPolynom: {fileID: 1599853098}
+  operationToPolynomial: {fileID: 1496007246}
+  resultedPolynomial: {fileID: 1506256691}
+  polynomialInput: {fileID: 0}
+  resultedPolynomialInput: {fileID: 1958922893}
+  graphPolynomial: {fileID: 1599853098}
 --- !u!1 &282245495
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,7 +1012,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Derivate
+  m_Text: Derivative
 --- !u!222 &282245498
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1192,7 +1192,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 322205976}
-        m_MethodName: numbersToPolynom
+        m_MethodName: NumbersToPolynom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1279,7 +1279,7 @@ GameObject:
   - component: {fileID: 336559661}
   - component: {fileID: 336559660}
   m_Layer: 5
-  m_Name: Derivate
+  m_Name: Derivative
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1346,7 +1346,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1011129904}
-        m_MethodName: OnDerivatePress
+        m_MethodName: OnDerivativePress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1982,7 +1982,7 @@ GameObject:
   - component: {fileID: 484702283}
   - component: {fileID: 484702282}
   m_Layer: 5
-  m_Name: Derivate
+  m_Name: Derivative
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2029,7 +2029,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1708398487}
-        m_MethodName: OnDerivatePress
+        m_MethodName: OnDerivativePress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3541,7 +3541,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Derivate
+  m_Text: Derivative
 --- !u!222 &960589241
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3687,11 +3687,11 @@ MonoBehaviour:
   - {fileID: 1472709483}
   xValue: {fileID: 1976739891}
   graph: {fileID: 757531978}
-  operationToPolynom: {fileID: 436347660}
-  resultedPolynom: {fileID: 874750497}
-  polynomInput: {fileID: 322205976}
-  resultedPolynomInput: {fileID: 0}
-  graphPolynom: {fileID: 1599853098}
+  operationToPolynomial: {fileID: 436347660}
+  resultedPolynomial: {fileID: 874750497}
+  polynomialInput: {fileID: 322205976}
+  resultedPolynomialInput: {fileID: 0}
+  graphPolynomial: {fileID: 1599853098}
 --- !u!1 &1032973765
 GameObject:
   m_ObjectHideFlags: 0
@@ -4005,7 +4005,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1094225290}
-        m_MethodName: numbersToPolynom
+        m_MethodName: NumbersToPolynom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5526,7 +5526,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Derivate
+  m_Text: Derivative
 --- !u!222 &1695290358
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5673,11 +5673,11 @@ MonoBehaviour:
   - {fileID: 394311014}
   xValue: {fileID: 839151297}
   graph: {fileID: 757531978}
-  operationToPolynom: {fileID: 576621757}
-  resultedPolynom: {fileID: 762372747}
-  polynomInput: {fileID: 1094225290}
-  resultedPolynomInput: {fileID: 0}
-  graphPolynom: {fileID: 1599853098}
+  operationToPolynomial: {fileID: 576621757}
+  resultedPolynomial: {fileID: 762372747}
+  polynomialInput: {fileID: 1094225290}
+  resultedPolynomialInput: {fileID: 0}
+  graphPolynomial: {fileID: 1599853098}
 --- !u!1 &1742978968
 GameObject:
   m_ObjectHideFlags: 0
@@ -6188,9 +6188,9 @@ MonoBehaviour:
   - {fileID: 1137586328}
   - {fileID: 456712705}
   - {fileID: 1642917136}
-  resultedPolynom: {fileID: 655668367}
-  polynom1: {fileID: 322205976}
-  polynom2: {fileID: 1094225290}
+  resultedPolynomial: {fileID: 655668367}
+  polynomial1Input: {fileID: 322205976}
+  polynomial2Input: {fileID: 1094225290}
 --- !u!1 &1976739889
 GameObject:
   m_ObjectHideFlags: 0
