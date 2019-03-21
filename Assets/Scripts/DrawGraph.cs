@@ -22,7 +22,7 @@ public class DrawGraph : MonoBehaviour
 
         for (float i = -14; i <= 14; i += 0.02f)
         {
-            float xSign = new float();
+            float xSign = 0;
             if (i < 0)
             {
                 xSign = -1;
@@ -32,7 +32,7 @@ public class DrawGraph : MonoBehaviour
                 xSign = 1;
             }
 
-            float result = new float();
+            float result = 0;
             foreach (var monom in PolynomialEquation)
             {
                 if (monom.Exponent % 2 == 0)

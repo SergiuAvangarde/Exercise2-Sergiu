@@ -61,8 +61,8 @@ public class AdvancedOperations : MonoBehaviour
     private void DerivativePolynomial()
     {
         resultedPolynomialEquation = new List<Monom>();
-        float coeficientResult = new float();
-        float exponentResult = new float();
+        float coeficientResult = 0;
+        float exponentResult = 0;
 
         foreach (var monom in initialPolynomialEquation)
         {
@@ -81,8 +81,8 @@ public class AdvancedOperations : MonoBehaviour
     private void IntegratePolynomial()
     {
         resultedPolynomialEquation = new List<Monom>();
-        float coeficientResult = new float();
-        float exponentResult = new float();
+        float coeficientResult = 0;
+        float exponentResult = 0;
 
         foreach (var monom in initialPolynomialEquation)
         {
@@ -97,11 +97,11 @@ public class AdvancedOperations : MonoBehaviour
     //the result is added to the resulted monoms list and printed to the interface
     public void SetXValue()
     {
-        float XNumber = new float();
-        float result = new float();
+        float XNumber = 0;
+        float result = 0;
         XNumber = float.Parse(xValue.text);
 
-        float xSign = new float();
+        float xSign = 0;
         if (XNumber < 0)
         {
             xSign = -1;
