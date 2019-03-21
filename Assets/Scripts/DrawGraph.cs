@@ -18,12 +18,9 @@ public class DrawGraph : MonoBehaviour
     //it is incrementing by 0.1 for a smoother curve on the graph
     public void CreateGraph()
     {
-        bool low = true;
-        bool high = true;
-
         pointsList = new List<Vector3>();
 
-        for (float i = -10; i <= 10; i += 0.1f)
+        for (float i = -10; i <= 10; i += 0.02f)
         {
             float xSign = new float();
             if (i < 0)
@@ -48,7 +45,21 @@ public class DrawGraph : MonoBehaviour
                 }
             }
 
-            pointsList.Add(new Vector3(i, result, 0));
+            //if (result <= -10.5f)
+            //{
+            //    result = -10.5f;
+            //    pointsList.Add(new Vector3(i, result, 0));
+            //}
+            //else
+            if(result >= -10.6f && result <= 10.6f)
+            {
+                pointsList.Add(new Vector3(i, result, 0));
+            }
+            //else if (result >= 10.5f)
+            //{
+            //    result = 10.5f;
+            //    pointsList.Add(new Vector3(i, result, 0));
+            //}
         }
 
         Line.positionCount = pointsList.Count;
