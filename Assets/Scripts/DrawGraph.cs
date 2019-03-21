@@ -6,12 +6,12 @@ public class DrawGraph : MonoBehaviour
 {
     public List<Monom> PolynomEquation { get; set; }
     private List<Vector3> pointsList;
-    private LineRenderer Line;
+    private LineRenderer line;
 
     //sets a reference for the line renderer component
     private void Awake()
     {
-        Line = GetComponent<LineRenderer>();
+        line = GetComponent<LineRenderer>();
     }
 
     //this function takes the input polynom and creates a graph with X values of -10 to 10
@@ -35,13 +35,13 @@ public class DrawGraph : MonoBehaviour
             float result = new float();
             foreach (var monom in PolynomEquation)
             {
-                if (monom.exponent % 2 == 0)
+                if (monom.Exponent % 2 == 0)
                 {
-                    result += monom.coefficient * monom.sign * Mathf.Pow(Mathf.Abs(i), monom.exponent);
+                    result += monom.Coefficient * monom.Sign * Mathf.Pow(Mathf.Abs(i), monom.Exponent);
                 }
                 else
                 {
-                    result += monom.coefficient * monom.sign * (Mathf.Pow(Mathf.Abs(i), monom.exponent) * xSign);
+                    result += monom.Coefficient * monom.Sign * (Mathf.Pow(Mathf.Abs(i), monom.Exponent) * xSign);
                 }
             }
 
@@ -51,7 +51,7 @@ public class DrawGraph : MonoBehaviour
             }
         }
 
-        Line.positionCount = pointsList.Count;
-        Line.SetPositions(pointsList.ToArray());
+        line.positionCount = pointsList.Count;
+        line.SetPositions(pointsList.ToArray());
     }
 }

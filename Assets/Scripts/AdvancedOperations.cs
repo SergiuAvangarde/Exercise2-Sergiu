@@ -10,7 +10,7 @@ public class AdvancedOperations : MonoBehaviour
     [Tooltip("The inputfield with the value of X"), SerializeField]
     private InputField xValue;
     [SerializeField]
-    private GameObject Graph;
+    private GameObject graph;
     [SerializeField]
     private Text operationToPolynom;
     [SerializeField]
@@ -20,7 +20,7 @@ public class AdvancedOperations : MonoBehaviour
     [Tooltip("This should be left null if the script is used with polynom 1 or 2"), SerializeField]
     private PolynomOperations resultedPolynomInput;
     [SerializeField]
-    private DrawGraph GraphPolynom;
+    private DrawGraph graphPolynom;
 
     private List<Monom> initialPolynomEquation;
     private List<Monom> resultedPolynomEquation;
@@ -72,10 +72,10 @@ public class AdvancedOperations : MonoBehaviour
 
         foreach (var monom in initialPolynomEquation)
         {
-            if (monom.exponent > 0)
+            if (monom.Exponent > 0)
             {
-                coeficientResult = monom.coefficient * monom.sign * monom.exponent;
-                exponentResult = monom.exponent - 1;
+                coeficientResult = monom.Coefficient * monom.Sign * monom.Exponent;
+                exponentResult = monom.Exponent - 1;
 
                 resultedPolynomEquation.Add(MonomFactory.CreateMonomObj(coeficientResult, exponentResult));
             }
@@ -92,8 +92,8 @@ public class AdvancedOperations : MonoBehaviour
 
         foreach (var monom in initialPolynomEquation)
         {
-            coeficientResult = monom.coefficient * monom.sign / (monom.exponent + 1);
-            exponentResult = monom.exponent + 1;
+            coeficientResult = monom.Coefficient * monom.Sign / (monom.Exponent + 1);
+            exponentResult = monom.Exponent + 1;
 
             resultedPolynomEquation.Add(MonomFactory.CreateMonomObj(coeficientResult, exponentResult));
         }
@@ -119,13 +119,13 @@ public class AdvancedOperations : MonoBehaviour
 
         foreach (var monom in initialPolynomEquation)
         {
-            if (monom.exponent % 2 == 0)
+            if (monom.Exponent % 2 == 0)
             {
-                result += monom.coefficient * monom.sign * Mathf.Pow(Mathf.Abs(XNumber), monom.exponent);
+                result += monom.Coefficient * monom.Sign * Mathf.Pow(Mathf.Abs(XNumber), monom.Exponent);
             }
             else
             {
-                result += monom.coefficient * monom.sign * (Mathf.Pow(Mathf.Abs(XNumber), monom.exponent) * xSign);
+                result += monom.Coefficient * monom.Sign * (Mathf.Pow(Mathf.Abs(XNumber), monom.Exponent) * xSign);
             }
         }
 
@@ -182,9 +182,9 @@ public class AdvancedOperations : MonoBehaviour
     //it activates the graph gameobject, sets the input polynom for the graph and calls the CreateGraph function
     public void OnGraphPress()
     {
-        Graph.SetActive(true);
-        GraphPolynom.PolynomEquation = new List<Monom>();
-        GraphPolynom.PolynomEquation = initialPolynomEquation;
-        GraphPolynom.CreateGraph();
+        graph.SetActive(true);
+        graphPolynom.PolynomEquation = new List<Monom>();
+        graphPolynom.PolynomEquation = initialPolynomEquation;
+        graphPolynom.CreateGraph();
     }
 }

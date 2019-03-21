@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Monom
 {
-    public float coefficient;
-    public float exponent;
-    public float sign;
+    public float Coefficient;
+    public float Exponent;
+    public float Sign;
 
     //this function takes the coeficient and the exponent and creates a string of Monom type with them
     public string MonomString()
     {
-        var coef = coefficient;
-        var exp = exponent;
+        var coef = Coefficient;
+        var exp = Exponent;
         string result = null;
 
         if (coef != 0)

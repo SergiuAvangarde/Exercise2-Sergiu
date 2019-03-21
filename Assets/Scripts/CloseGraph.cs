@@ -5,11 +5,15 @@ using UnityEngine.EventSystems;
 
 public class CloseGraph : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField]
-    private GameObject GraphPanel;
+    private GameObject graphPanel;
+
+    private void Awake()
+    {
+        graphPanel = this.gameObject;
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        GraphPanel.SetActive(false);
+        graphPanel.SetActive(false);
     }
 }

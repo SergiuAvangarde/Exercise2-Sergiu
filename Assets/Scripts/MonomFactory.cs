@@ -10,14 +10,14 @@ public class MonomFactory
         Monom monomObject = new Monom();
         if (coef >= 0)
         {
-            monomObject.sign = Mathf.Sign(+1);
+            monomObject.Sign = Mathf.Sign(+1);
         }
         else
         {
-            monomObject.sign = Mathf.Sign(-1);
+            monomObject.Sign = Mathf.Sign(-1);
         }
-        monomObject.coefficient = Mathf.Abs(coef);
-        monomObject.exponent = exp;
+        monomObject.Coefficient = Mathf.Abs(coef);
+        monomObject.Exponent = exp;
 
         if (!string.IsNullOrEmpty(monomObject.MonomString()))
         {
@@ -36,16 +36,16 @@ public class MonomFactory
         int i = 0;
         foreach (var monom in polynomList)
         {
-            if (i == 0 && monom.sign == +1)
+            if (i == 0 && monom.Sign == +1)
             {
                 ResultedPolynomialString.Add(monom.MonomString());
                 i++;
             }
-            else if (monom.sign == 1)
+            else if (monom.Sign == 1)
             {
                 ResultedPolynomialString.Add("+ " + monom.MonomString());
             }
-            else if (monom.sign == -1)
+            else if (monom.Sign == -1)
             {
                 ResultedPolynomialString.Add("- " + monom.MonomString());
             }

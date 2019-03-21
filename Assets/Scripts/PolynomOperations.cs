@@ -57,18 +57,18 @@ public class PolynomOperations : MonoBehaviour
             }
             else
             {
-                if (monomFrom2.sign == -1)
+                if (monomFrom2.Sign == -1)
                 {
-                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monomFrom2.coefficient, monomFrom2.exponent));
+                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monomFrom2.Coefficient, monomFrom2.Exponent));
                 }
                 else
                 {
-                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monomFrom2.coefficient * -1, monomFrom2.exponent));
+                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monomFrom2.Coefficient * -1, monomFrom2.Exponent));
                 }
             }
         }
 
-        resultedAddedEquation.Sort((a, b) => -1 * a.exponent.CompareTo(b.exponent));
+        resultedAddedEquation.Sort((a, b) => -1 * a.Exponent.CompareTo(b.Exponent));
     }
 
     //function to search on two polynom equations, multiply the coeficients and add the exponents
@@ -84,13 +84,13 @@ public class PolynomOperations : MonoBehaviour
         {
             for (int j = 0; j <= polynom2.PolynomialEquation.Count - 1; j++)
             {
-                coeficientResult = (polynom1.PolynomialEquation[i].coefficient * polynom1.PolynomialEquation[i].sign) * (polynom2.PolynomialEquation[j].coefficient * polynom2.PolynomialEquation[j].sign);
-                exponentResult = polynom1.PolynomialEquation[i].exponent + polynom2.PolynomialEquation[j].exponent;
+                coeficientResult = (polynom1.PolynomialEquation[i].Coefficient * polynom1.PolynomialEquation[i].Sign) * (polynom2.PolynomialEquation[j].Coefficient * polynom2.PolynomialEquation[j].Sign);
+                exponentResult = polynom1.PolynomialEquation[i].Exponent + polynom2.PolynomialEquation[j].Exponent;
 
                 resultedAddedEquation.Add(MonomFactory.CreateMonomObj(coeficientResult, exponentResult));
             }
         }
-        resultedAddedEquation.Sort((a, b) => -1 * a.exponent.CompareTo(b.exponent));
+        resultedAddedEquation.Sort((a, b) => -1 * a.Exponent.CompareTo(b.Exponent));
     }
 
     //this function takes two polynoms, checks the first coeficient of every equation and divides them if they can be divided
@@ -106,18 +106,18 @@ public class PolynomOperations : MonoBehaviour
         float coeficientResult = new float();
         float exponentResult = new float();
 
-        if (polynom1[0].exponent >= polynom2[0].exponent)
+        if (polynom1[0].Exponent >= polynom2[0].Exponent)
         {
-            coeficientResult = (polynom1[0].coefficient * polynom1[0].sign) / (polynom2[0].coefficient * polynom2[0].sign);
-            exponentResult = polynom1[0].exponent - polynom2[0].exponent;
+            coeficientResult = (polynom1[0].Coefficient * polynom1[0].Sign) / (polynom2[0].Coefficient * polynom2[0].Sign);
+            exponentResult = polynom1[0].Exponent - polynom2[0].Exponent;
 
             DivideMonom = MonomFactory.CreateMonomObj(coeficientResult, exponentResult);
             ResultedPolynomEquation.Add(DivideMonom);
 
             foreach (var monom in polynom2)
             {
-                coeficientResult = monom.coefficient * monom.sign * (DivideMonom.coefficient * DivideMonom.sign);
-                exponentResult = monom.exponent + DivideMonom.exponent;
+                coeficientResult = monom.Coefficient * monom.Sign * (DivideMonom.Coefficient * DivideMonom.Sign);
+                exponentResult = monom.Exponent + DivideMonom.Exponent;
 
                 if (MonomFactory.CreateMonomObj(coeficientResult, exponentResult) != null)
                 {
@@ -131,23 +131,23 @@ public class PolynomOperations : MonoBehaviour
             }
             foreach (var monom in DivideEquation)
             {
-                if (monom.sign == -1)
+                if (monom.Sign == -1)
                 {
-                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monom.coefficient, monom.exponent));
+                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monom.Coefficient, monom.Exponent));
                 }
                 else
                 {
-                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monom.coefficient * -1, monom.exponent));
+                    resultedAddedEquation.Add(MonomFactory.CreateMonomObj(monom.Coefficient * -1, monom.Exponent));
                 }
             }
-            resultedAddedEquation.Sort((a, b) => -1 * a.exponent.CompareTo(b.exponent));
+            resultedAddedEquation.Sort((a, b) => -1 * a.Exponent.CompareTo(b.Exponent));
 
             resultedDivideEquation = AddEquation(resultedAddedEquation);
 
             if (resultedDivideEquation.Count > 0)
             {
                 //counter is for debugging
-                if (resultedDivideEquation[0].exponent >= polynom2[0].exponent)
+                if (resultedDivideEquation[0].Exponent >= polynom2[0].Exponent)
                 {
                     return DividePolynoms(resultedDivideEquation, polynom2);
                 }
@@ -178,13 +178,13 @@ public class PolynomOperations : MonoBehaviour
 
         for (int i = 0; i <= firstPolynom.Count - 1; i++)
         {
-            if (((i + 1) <= firstPolynom.Count - 1) && (firstPolynom[i].exponent == firstPolynom[i + 1].exponent))
+            if (((i + 1) <= firstPolynom.Count - 1) && (firstPolynom[i].Exponent == firstPolynom[i + 1].Exponent))
             {
-                result = (firstPolynom[i].coefficient * firstPolynom[i].sign) + (firstPolynom[i + 1].coefficient * firstPolynom[i + 1].sign);
+                result = (firstPolynom[i].Coefficient * firstPolynom[i].Sign) + (firstPolynom[i + 1].Coefficient * firstPolynom[i + 1].Sign);
 
                 if (result != 0)
                 {
-                    secondPolynom.Add(MonomFactory.CreateMonomObj(result, firstPolynom[i].exponent));
+                    secondPolynom.Add(MonomFactory.CreateMonomObj(result, firstPolynom[i].Exponent));
                 }
                 i++;
             }
