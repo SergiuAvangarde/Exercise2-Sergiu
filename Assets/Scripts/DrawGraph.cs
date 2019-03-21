@@ -20,7 +20,7 @@ public class DrawGraph : MonoBehaviour
     {
         pointsList = new List<Vector3>();
 
-        for (float i = -10; i <= 10; i += 0.02f)
+        for (float i = -14; i <= 14; i += 0.02f)
         {
             float xSign = new float();
             if (i < 0)
@@ -45,21 +45,10 @@ public class DrawGraph : MonoBehaviour
                 }
             }
 
-            //if (result <= -10.5f)
-            //{
-            //    result = -10.5f;
-            //    pointsList.Add(new Vector3(i, result, 0));
-            //}
-            //else
-            if(result >= -10.6f && result <= 10.6f)
+            if(result >= -10.5f && result <= 10.5f)
             {
                 pointsList.Add(new Vector3(i, result, 0));
             }
-            //else if (result >= 10.5f)
-            //{
-            //    result = 10.5f;
-            //    pointsList.Add(new Vector3(i, result, 0));
-            //}
         }
 
         Line.positionCount = pointsList.Count;
