@@ -936,12 +936,12 @@ MonoBehaviour:
   - {fileID: 1041247616}
   - {fileID: 1874898025}
   xValue: {fileID: 239659615}
-  Graph: {fileID: 757531978}
+  graph: {fileID: 757531978}
   operationToPolynom: {fileID: 1496007246}
   resultedPolynom: {fileID: 1506256691}
   polynomInput: {fileID: 0}
   resultedPolynomInput: {fileID: 1958922893}
-  GraphPolynom: {fileID: 1599853098}
+  graphPolynom: {fileID: 1599853098}
 --- !u!1 &282245495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2874,7 +2874,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c40696cff342e348b7364d062b4a06d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GraphPanel: {fileID: 757531978}
 --- !u!1 &762372746
 GameObject:
   m_ObjectHideFlags: 0
@@ -3687,12 +3686,12 @@ MonoBehaviour:
   - {fileID: 26722770}
   - {fileID: 1472709483}
   xValue: {fileID: 1976739891}
-  Graph: {fileID: 757531978}
+  graph: {fileID: 757531978}
   operationToPolynom: {fileID: 436347660}
   resultedPolynom: {fileID: 874750497}
   polynomInput: {fileID: 322205976}
   resultedPolynomInput: {fileID: 0}
-  GraphPolynom: {fileID: 1599853098}
+  graphPolynom: {fileID: 1599853098}
 --- !u!1 &1032973765
 GameObject:
   m_ObjectHideFlags: 0
@@ -5673,12 +5672,12 @@ MonoBehaviour:
   - {fileID: 836851516}
   - {fileID: 394311014}
   xValue: {fileID: 839151297}
-  Graph: {fileID: 757531978}
+  graph: {fileID: 757531978}
   operationToPolynom: {fileID: 576621757}
   resultedPolynom: {fileID: 762372747}
   polynomInput: {fileID: 1094225290}
   resultedPolynomInput: {fileID: 0}
-  GraphPolynom: {fileID: 1599853098}
+  graphPolynom: {fileID: 1599853098}
 --- !u!1 &1742978968
 GameObject:
   m_ObjectHideFlags: 0
