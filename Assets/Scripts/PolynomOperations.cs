@@ -53,7 +53,12 @@ public class PolynomOperations : MonoBehaviour
             }
             else
             {
-                resultedAddedEquation.Add(MonomUtils.CreateMonomObj(monomFrom2.Coefficient * monomFrom2.Sign * -1, monomFrom2.Exponent));
+                var monomObj = new Monom(monomFrom2.Coefficient * monomFrom2.Sign * -1, monomFrom2.Exponent);
+                //resultedAddedEquation.Add(MonomUtils.CreateMonomObj(monomFrom2.Coefficient * monomFrom2.Sign * -1, monomFrom2.Exponent));
+                if (!string.IsNullOrEmpty(monomObj.MonomString()))
+                {
+                    resultedAddedEquation.Add(monomObj);
+                }
             }
         }
 
@@ -76,7 +81,11 @@ public class PolynomOperations : MonoBehaviour
                 coeficientResult = (polynomial1Input.PolynomialEquation[i].Coefficient * polynomial1Input.PolynomialEquation[i].Sign) * (polynomial2Input.PolynomialEquation[j].Coefficient * polynomial2Input.PolynomialEquation[j].Sign);
                 exponentResult = polynomial1Input.PolynomialEquation[i].Exponent + polynomial2Input.PolynomialEquation[j].Exponent;
 
-                resultedAddedEquation.Add(MonomUtils.CreateMonomObj(coeficientResult, exponentResult));
+                var monomObj = new Monom(coeficientResult, exponentResult);
+                if (!string.IsNullOrEmpty(monomObj.MonomString()))
+                {
+                    resultedAddedEquation.Add(monomObj);
+                }
             }
         }
         resultedAddedEquation.Sort((a, b) => -1 * a.Exponent.CompareTo(b.Exponent));
@@ -87,7 +96,6 @@ public class PolynomOperations : MonoBehaviour
     //and the function returns a remainder if there is any
     private List<Monom> DividePolynomials(List<Monom> polynomial1, List<Monom> polynomial2)
     {
-        Monom DivideMonom = new Monom();
         List<Monom> DivideEquation = new List<Monom>();
         List<Monom> resultedDivideEquation = new List<Monom>();
         List<Monom> remainder = new List<Monom>();
@@ -99,7 +107,7 @@ public class PolynomOperations : MonoBehaviour
             coeficientResult = (polynomial1[0].Coefficient * polynomial1[0].Sign) / (polynomial2[0].Coefficient * polynomial2[0].Sign);
             exponentResult = polynomial1[0].Exponent - polynomial2[0].Exponent;
 
-            DivideMonom = MonomUtils.CreateMonomObj(coeficientResult, exponentResult);
+            Monom DivideMonom = new Monom(coeficientResult, exponentResult);
             ResultedPolynomialEquation.Add(DivideMonom);
 
             foreach (var monom in polynomial2)
@@ -107,16 +115,21 @@ public class PolynomOperations : MonoBehaviour
                 coeficientResult = monom.Coefficient * monom.Sign * (DivideMonom.Coefficient * DivideMonom.Sign);
                 exponentResult = monom.Exponent + DivideMonom.Exponent;
 
-                if (MonomUtils.CreateMonomObj(coeficientResult, exponentResult) != null)
+                var monomObj = new Monom(coeficientResult, exponentResult);
+                if (!string.IsNullOrEmpty(monomObj.MonomString()))
                 {
-                    DivideEquation.Add(MonomUtils.CreateMonomObj(coeficientResult, exponentResult));
+                    DivideEquation.Add(monomObj);
                 }
             }
 
             resultedAddedEquation = new List<Monom>(polynomial1);
             foreach (var monom in DivideEquation)
             {
-                resultedAddedEquation.Add(MonomUtils.CreateMonomObj(monom.Coefficient * monom.Sign * -1, monom.Exponent));
+                var monomObj = new Monom(monom.Coefficient * monom.Sign * -1, monom.Exponent);
+                if (!string.IsNullOrEmpty(monomObj.MonomString()))
+                {
+                    resultedAddedEquation.Add(monomObj);
+                }
             }
             resultedAddedEquation.Sort((a, b) => -1 * a.Exponent.CompareTo(b.Exponent));
 
@@ -124,7 +137,6 @@ public class PolynomOperations : MonoBehaviour
 
             if (resultedDivideEquation.Count > 0)
             {
-                //counter is for debugging
                 if (resultedDivideEquation[0].Exponent >= polynomial2[0].Exponent)
                 {
                     return DividePolynomials(resultedDivideEquation, polynomial2);
@@ -162,7 +174,11 @@ public class PolynomOperations : MonoBehaviour
 
                 if (result != 0)
                 {
-                    secondPolynomial.Add(MonomUtils.CreateMonomObj(result, firstPolynomial[i].Exponent));
+                    var monomObj = new Monom(result, firstPolynomial[i].Exponent);
+                    if (!string.IsNullOrEmpty(monomObj.MonomString()))
+                    {
+                        secondPolynomial.Add(monomObj);
+                    }
                 }
                 i++;
             }

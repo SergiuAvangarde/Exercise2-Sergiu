@@ -45,7 +45,7 @@ public class DrawGraph : MonoBehaviour
                 }
             }
 
-            //this comented section should not let the graph go outside the bounds of the background
+            //this commented section should not let the graph go outside the bounds of the background
             //if(result >= -10.5f && result <= 10.5f)
             //{
                 pointsList.Add(new Vector3(i, result, 0));

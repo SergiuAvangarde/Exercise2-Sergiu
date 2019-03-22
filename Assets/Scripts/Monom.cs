@@ -23,7 +23,7 @@ public class Monom
                 {
                     result = "x^" + exp.ToString();
                 }
-                else if(exp == 1)
+                else if (exp == 1)
                 {
                     result = "x";
                 }
@@ -49,5 +49,25 @@ public class Monom
             }
         }
         return result;
+    }
+
+    public Monom()
+    {
+    
+    }
+    
+    //monom constructor with parameters, to use instead of static function for creating objects
+    public Monom(float coef, float exp)
+    {
+        if (coef >= 0)
+        {
+            Sign = Mathf.Sign(+1);
+        }
+        else
+        {
+            Sign = Mathf.Sign(-1);
+        }
+        Coefficient = Mathf.Abs(coef);
+        Exponent = exp;
     }
 }

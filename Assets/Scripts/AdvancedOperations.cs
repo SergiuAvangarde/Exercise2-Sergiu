@@ -71,7 +71,11 @@ public class AdvancedOperations : MonoBehaviour
                 coeficientResult = monom.Coefficient * monom.Sign * monom.Exponent;
                 exponentResult = monom.Exponent - 1;
 
-                resultedPolynomialEquation.Add(MonomUtils.CreateMonomObj(coeficientResult, exponentResult));
+                var monomObj = new Monom(coeficientResult, exponentResult);
+                if (!string.IsNullOrEmpty(monomObj.MonomString()))
+                {
+                    resultedPolynomialEquation.Add(monomObj);
+                }
             }
         }
     }
@@ -89,7 +93,11 @@ public class AdvancedOperations : MonoBehaviour
             coeficientResult = monom.Coefficient * monom.Sign / (monom.Exponent + 1);
             exponentResult = monom.Exponent + 1;
 
-            resultedPolynomialEquation.Add(MonomUtils.CreateMonomObj(coeficientResult, exponentResult));
+            var monomObj = new Monom(coeficientResult, exponentResult);
+            if (!string.IsNullOrEmpty(monomObj.MonomString()))
+            {
+                resultedPolynomialEquation.Add(monomObj);
+            }
         }
     }
 
@@ -99,40 +107,43 @@ public class AdvancedOperations : MonoBehaviour
     {
         float XNumber = 0;
         float result = 0;
-        XNumber = float.Parse(xValue.text);
 
-        float xSign = 0;
-        if (XNumber < 0)
+        if (!string.IsNullOrEmpty(xValue.text))
         {
-            xSign = -1;
-        }
-        else
-        {
-            xSign = 1;
-        }
+            XNumber = float.Parse(xValue.text);
 
-        foreach (var monom in initialPolynomialEquation)
-        {
-            if (monom.Exponent % 2 == 0)
+            float xSign = 0;
+            if (XNumber < 0)
             {
-                result += monom.Coefficient * monom.Sign * Mathf.Pow(Mathf.Abs(XNumber), monom.Exponent);
+                xSign = -1;
             }
             else
             {
-                result += monom.Coefficient * monom.Sign * (Mathf.Pow(Mathf.Abs(XNumber), monom.Exponent) * xSign);
+                xSign = 1;
+            }
+
+            foreach (var monom in initialPolynomialEquation)
+            {
+                if (monom.Exponent % 2 == 0)
+                {
+                    result += monom.Coefficient * monom.Sign * Mathf.Pow(Mathf.Abs(XNumber), monom.Exponent);
+                }
+                else
+                {
+                    result += monom.Coefficient * monom.Sign * (Mathf.Pow(Mathf.Abs(XNumber), monom.Exponent) * xSign);
+                }
+            }
+
+            operationToPolynomial.text = "Polynom with X value of " + XNumber.ToString() + " is: ";
+            if (result != 0)
+            {
+                resultedPolynomial.text = result.ToString();
+            }
+            else
+            {
+                resultedPolynomial.text = " 0 ";
             }
         }
-
-        operationToPolynomial.text = "Polynom with X value of " + XNumber.ToString() + " is: ";
-        if (result != 0)
-        {
-            resultedPolynomial.text = result.ToString();
-        }
-        else
-        {
-            resultedPolynomial.text = " 0 ";
-        }
-
     }
 
     //this function is called when the user presses the button Derivative

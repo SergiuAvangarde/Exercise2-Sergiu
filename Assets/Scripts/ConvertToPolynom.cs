@@ -41,9 +41,10 @@ public class ConvertToPolynom : MonoBehaviour
 
             for (int i = numbersArray.Length - 1; i >= 0; i--)
             {
-                if (MonomUtils.CreateMonomObj(numbersArray[numbersArray.Length - 1 - i], i) != null)
+                var monomObj = new Monom(numbersArray[numbersArray.Length - 1 - i], i);
+                if (!string.IsNullOrEmpty(monomObj.MonomString()))
                 {
-                    PolynomialEquation.Add(MonomUtils.CreateMonomObj(numbersArray[numbersArray.Length - 1 - i], i));
+                    PolynomialEquation.Add(monomObj);
                 }
             }
 
