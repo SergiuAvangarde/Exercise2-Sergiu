@@ -153,7 +153,7 @@ public class PolynomOperations : MonoBehaviour
         }
         else
         {
-            ResultedPolynomialEquation = polynomial2;
+            ResultedPolynomialEquation = null;
             return polynomial1;
         }
     }
@@ -261,9 +261,14 @@ public class PolynomOperations : MonoBehaviour
         {
             resultedPolynomial.text = "Division by 0 is not posible";
         }
+        else if(polynomial1Input.PolynomialEquation.Count < polynomial2Input.PolynomialEquation.Count)
+        {
+            resultedPolynomial.text = "The second polynom is greater than the first one.";
+        }
         else
         {
-            var remainder = new List<Monom>(DividePolynomials(polynomial1Input.PolynomialEquation, polynomial2Input.PolynomialEquation));
+            var remainder = new List<Monom>();
+            remainder = DividePolynomials(polynomial1Input.PolynomialEquation, polynomial2Input.PolynomialEquation);
 
             if (ResultedPolynomialEquation.Count > 0)
             {
