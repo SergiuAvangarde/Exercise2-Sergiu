@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Monom
 {
-    public float Coefficient;
-    public float Exponent;
-    public float Sign;
+    public float Coefficient { get; set; }
+    public float Exponent { get; set; }
+    public float Sign { get; set; }
 
     //this function takes the coeficient and the exponent and creates a string of Monom type with them
     public string MonomString()
