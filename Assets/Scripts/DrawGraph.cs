@@ -14,7 +14,7 @@ public class DrawGraph : MonoBehaviour
         line = GetComponent<LineRenderer>();
     }
 
-    //this function takes the input polynom and creates a graph with X values of -10 to 10
+    //this function takes the input polynomial and creates a graph with X values of -10 to 10
     //it is incrementing by 0.1 for a smoother curve on the graph
     public void CreateGraph()
     {

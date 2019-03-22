@@ -38,7 +38,7 @@ public class PolynomOperations : MonoBehaviour
     }
 
     //Adds two polynomial equations on a single Monom list 
-    //If operation is false the second list is added with '-' sign for substract operation;
+    //if operation is false the second list is added with '-' sign for substract operation;
     //sorts it in descending order acording to exponent value
     private void AddOrSubPolynomials(bool operation)
     {
@@ -54,7 +54,6 @@ public class PolynomOperations : MonoBehaviour
             else
             {
                 var monomObj = new Monom(monomFrom2.Coefficient * monomFrom2.Sign * -1, monomFrom2.Exponent);
-                //resultedAddedEquation.Add(MonomUtils.CreateMonomObj(monomFrom2.Coefficient * monomFrom2.Sign * -1, monomFrom2.Exponent));
                 if (!string.IsNullOrEmpty(monomObj.MonomString()))
                 {
                     resultedAddedEquation.Add(monomObj);

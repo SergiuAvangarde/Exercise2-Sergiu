@@ -23,7 +23,6 @@ public class ConvertToPolynom : MonoBehaviour
 
     //Splits the string from the input field at every space and adds the elements to a float array
     //converts the values from the array to a list of Monoms
-    //prints the polynom to a text field
     public void NumbersToPolynom()
     {
         PolynomialEquation = new List<Monom>();

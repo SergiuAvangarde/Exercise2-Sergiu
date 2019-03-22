@@ -51,12 +51,13 @@ public class Monom
         return result;
     }
 
+    //monom default constructor
     public Monom()
     {
     
     }
     
-    //monom constructor with parameters, to use instead of static function for creating objects
+    //monom constructor with parameters
     public Monom(float coef, float exp)
     {
         if (coef >= 0)
