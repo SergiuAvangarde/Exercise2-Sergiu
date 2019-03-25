@@ -1,10 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class MonomUtils
 {
-    //this function takes a list of Monoms and converts them to an Polynom equation string adding the coresponding signs
+    /// <summary>
+    /// this function takes a list of Monoms and converts them to an Polynom equation string adding the coresponding signs
+    /// </summary>
+    /// <param name="polynomList">A list of monoms wich forms the polynomial equation</param>
+    /// <returns>A string of polynomial equation type</returns>
     public static List<string> PrintPolynomial(List<Monom> polynomList)
     {
         List<string> resultedPolynomialString = new List<string>();

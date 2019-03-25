@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +17,9 @@ public class PolynomOperations : MonoBehaviour
 
     private List<Monom> resultedAddedEquation;
 
-    //check if any of the equations are null, and if so, it makes the buttons inactive 
+    /// <summary>
+    /// check if any of the equations are null, and if so, it makes the buttons inactive 
+    /// </summary>
     private void Update()
     {
         if (polynomial1Input.PolynomialEquation == null || polynomial2Input.PolynomialEquation == null)
@@ -37,9 +38,11 @@ public class PolynomOperations : MonoBehaviour
         }
     }
 
-    //Adds two polynomial equations on a single Monom list 
-    //if operation is false the second list is added with '-' sign for substract operation;
-    //sorts it in descending order acording to exponent value
+    /// <summary>
+    /// Adds two polynomial equations on a single Monom list 
+    /// sorts it in descending order acording to exponent value
+    /// </summary>
+    /// <param name="operation"> this is true if I want to apply the + operation and false for - operation</param>
     private void AddOrSubPolynomials(bool operation)
     {
         ResultedPolynomialEquation = new List<Monom>();
@@ -64,8 +67,10 @@ public class PolynomOperations : MonoBehaviour
         resultedAddedEquation.Sort((a, b) => -1 * a.Exponent.CompareTo(b.Exponent));
     }
 
-    //function to search on two polynom equations, multiply the coeficients and add the exponents
-    //it creates a new Monom List with the new values
+    /// <summary>
+    /// function to search on two polynom equations, multiply the coeficients and add the exponents
+    /// it creates a new Monom List with the new values
+    /// </summary>
     private void MultiplyArrays()
     {
         resultedAddedEquation = new List<Monom>();
@@ -90,9 +95,13 @@ public class PolynomOperations : MonoBehaviour
         resultedAddedEquation.Sort((a, b) => -1 * a.Exponent.CompareTo(b.Exponent));
     }
 
-    //this function takes two polynoms, checks the first coeficient of every equation and divides them if they can be divided
-    //the function is recalled until the polynoms can't be divided anymore
-    //and the function returns a remainder if there is any
+    /// <summary>
+    /// this function takes two polynoms, checks the first coeficient of every equation and divides them if they can be divided
+    /// the function is recalled until the polynoms can't be divided anymore
+    /// </summary>
+    /// <param name="polynomial1">the first polynomial</param>
+    /// <param name="polynomial2">the second polynomial</param>
+    /// <returns>the remainder from the division of the two polynoms</returns>
     private List<Monom> DividePolynomials(List<Monom> polynomial1, List<Monom> polynomial2)
     {
         List<Monom> DivideEquation = new List<Monom>();
@@ -158,8 +167,12 @@ public class PolynomOperations : MonoBehaviour
         }
     }
 
-    //searches in Monom list for every object with the same exponent then adds the coeficients acording to operation value
-    //it recalls itself until there is no objects with the same exponent
+    /// <summary>
+    /// searches in Monom list for every object with the same exponent then adds the coeficients acording to operation value
+    /// it recalls itself until there is no objects with the same exponent
+    /// </summary>
+    /// <param name="firstPolynomial"> the polynomial equation with more than one monom with the same exponent </param>
+    /// <returns>the second polynomial with added monoms of the same exponent value</returns>
     private List<Monom> AddEquation(List<Monom> firstPolynomial)
     {
         List<Monom> secondPolynomial = new List<Monom>();
@@ -200,8 +213,10 @@ public class PolynomOperations : MonoBehaviour
         }
     }
 
-    //this function is called when you press Add button on UI, it needs refference in button component
-    //it shows the resulted polynom on UI
+    /// <summary>
+    /// this function is called when you press Add button on UI, it needs refference in button component
+    /// it shows the resulted polynom on UI
+    /// </summary>
     public void OnAddPress()
     {
         AddOrSubPolynomials(true);
@@ -217,8 +232,10 @@ public class PolynomOperations : MonoBehaviour
         }
     }
 
-    //this function is called when you press Substract button on UI, it needs refference in button component
-    //it shows the resulted polynom on UI
+    /// <summary>
+    /// this function is called when you press Substract button on UI, it needs refference in button component
+    /// it shows the resulted polynom on UI
+    /// </summary>
     public void OnSubstractPress()
     {
         AddOrSubPolynomials(false);
@@ -234,8 +251,10 @@ public class PolynomOperations : MonoBehaviour
         }
     }
 
-    //this function is called when you press Multiply button on UI, it needs refference in button component
-    //it shows the resulted polynom on UI
+    /// <summary>
+    /// this function is called when you press Multiply button on UI, it needs refference in button component
+    /// it shows the resulted polynom on UI
+    /// </summary>
     public void OnMultiplyPress()
     {
         MultiplyArrays();
@@ -251,8 +270,10 @@ public class PolynomOperations : MonoBehaviour
         }
     }
 
-    //this function is called when you press Divide button on UI, it needs refference in button component
-    //it shows the resulted polynom on UI
+    /// <summary>
+    /// this function is called when you press Divide button on UI, it needs refference in button component
+    /// it shows the resulted polynom on UI
+    /// </summary>
     public void OnDividePress()
     {
         ResultedPolynomialEquation = new List<Monom>();

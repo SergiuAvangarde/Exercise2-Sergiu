@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class CloseGraph : MonoBehaviour, IPointerClickHandler
@@ -12,7 +10,10 @@ public class CloseGraph : MonoBehaviour, IPointerClickHandler
         graphPanel = this.gameObject;
     }
 
-    //when the user clicks somewhere on the graph interface the gameobjects is set inactive.
+    /// <summary>
+    /// when the user clicks somewhere on the graph interface the gameobjects is set inactive
+    /// </summary>
+    /// <param name="eventData"> checks for the click event </param>
     public void OnPointerClick(PointerEventData eventData)
     {
         graphPanel.SetActive(false);

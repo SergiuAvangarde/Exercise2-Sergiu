@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Monom
 {
@@ -8,7 +6,10 @@ public class Monom
     public float Exponent { get; set; }
     public float Sign { get; set; }
 
-    //this function takes the coeficient and the exponent and creates a string of Monom type with them
+    /// <summary>
+    /// this function takes the coeficient and the exponent and creates a monom
+    /// </summary>
+    /// <returns>the resulted monom as a string</returns>
     public string MonomString()
     {
         var coef = Coefficient;
@@ -51,13 +52,19 @@ public class Monom
         return result;
     }
 
-    //monom default constructor
+    /// <summary>
+    /// monom default constructor
+    /// </summary>
     public Monom()
     {
     
     }
-    
-    //monom constructor with parameters
+
+    /// <summary>
+    /// monom constructor with parameters
+    /// </summary>
+    /// <param name="coef">the coeficient of the monom</param>
+    /// <param name="exp">the exponent of the monom</param>
     public Monom(float coef, float exp)
     {
         if (coef >= 0)

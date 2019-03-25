@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,14 +14,18 @@ public class ConvertToPolynom : MonoBehaviour
     private string[] numbersString;
     private float[] numbersArray;
 
-    //initialize InputField component
+
+    /// <summary>
+    /// initialize InputField component
+    /// </summary>
     private void Start()
     {
         inputNumbers = GetComponent<InputField>();
     }
-
-    //Splits the string from the input field at every space and adds the elements to a float array
-    //converts the values from the array to a list of Monoms
+    /// <summary>
+    /// Splits the string from the input field at every space and adds the elements to a float array
+    /// converts the values from the array to a list of Monoms
+    /// </summary>
     public void NumbersToPolynom()
     {
         PolynomialEquation = new List<Monom>();

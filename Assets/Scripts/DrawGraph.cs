@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class DrawGraph : MonoBehaviour
@@ -8,14 +7,18 @@ public class DrawGraph : MonoBehaviour
     private List<Vector3> pointsList;
     private LineRenderer line;
 
-    //sets a reference for the line renderer component
+    /// <summary>
+    /// sets a reference for the line renderer component
+    /// </summary>
     private void Awake()
     {
         line = GetComponent<LineRenderer>();
     }
 
-    //this function takes the input polynomial and creates a graph with X values of -10 to 10
-    //it is incrementing by 0.1 for a smoother curve on the graph
+    /// <summary>
+    /// this function takes the input polynomial and creates a graph with X values of -10 to 10
+    /// it is incrementing by 0.1 for a smoother curve on the graph
+    /// </summary>
     public void CreateGraph()
     {
         pointsList = new List<Vector3>();

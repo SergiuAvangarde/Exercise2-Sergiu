@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,8 +24,10 @@ public class AdvancedOperations : MonoBehaviour
     private List<Monom> initialPolynomialEquation = new List<Monom>();
     private List<Monom> resultedPolynomialEquation;
 
-    //checks if the initial equation is one of the polynoms from input field or the resulted polynom
-    //if any of the equations are null, makes the buttons inactive
+    /// <summary>
+    /// checks if the initial equation is one of the polynoms from input field or the resulted polynom
+    /// if any of the equations are null, makes the buttons inactive
+    /// </summary>
     private void Update()
     {
         if (polynomialInput != null)
@@ -56,8 +57,10 @@ public class AdvancedOperations : MonoBehaviour
         }
     }
 
-    //checks for every monom in equation, and applies the Derivative operation
-    //the result is added to the resulted monoms list
+    /// <summary>
+    /// checks for every monom in equation, and applies the Derivative operation
+    /// the result is added to the resulted monoms list
+    /// </summary>
     private void DerivativePolynomial()
     {
         resultedPolynomialEquation = new List<Monom>();
@@ -80,8 +83,10 @@ public class AdvancedOperations : MonoBehaviour
         }
     }
 
-    //checks for every monom in equation, and integrates it
-    //the result is added to the resulted monoms list
+    /// <summary>
+    /// checks for every monom in equation, and integrates it
+    /// the result is added to the resulted monoms list
+    /// </summary>
     private void IntegratePolynomial()
     {
         resultedPolynomialEquation = new List<Monom>();
@@ -101,8 +106,10 @@ public class AdvancedOperations : MonoBehaviour
         }
     }
 
-    //check for every monom in equation, and changes the value of X with the one provided in the input field
-    //the result is added to the resulted monoms list and printed to the interface
+    /// <summary>
+    /// check for every monom in equation, and changes the value of X with the one provided in the input field
+    /// the result is added to the resulted monoms list and printed to the interface
+    /// </summary>
     public void SetXValue()
     {
         float XNumber = 0;
@@ -146,8 +153,10 @@ public class AdvancedOperations : MonoBehaviour
         }
     }
 
-    //this function is called when the user presses the button Derivative
-    //it calls the Derivative funtion above and prints the result to interface
+    /// <summary>
+    /// this function is called when the user presses the button Derivative
+    /// it calls the Derivative funtion above and prints the result to interface
+    /// </summary>
     public void OnDerivativePress()
     {
         DerivativePolynomial();
@@ -163,8 +172,10 @@ public class AdvancedOperations : MonoBehaviour
         }
     }
 
-    //this function is called when the user presses the button Integrate
-    //it calls the Integrate funtion above and prints the result to interface
+    /// <summary>
+    /// this function is called when the user presses the button Integrate
+    /// it calls the Integrate funtion above and prints the result to interface
+    /// </summary>
     public void OnIntegratePress()
     {
         IntegratePolynomial();
@@ -180,8 +191,10 @@ public class AdvancedOperations : MonoBehaviour
         }
     }
 
-    //this function is called when the user presses the button Graph
-    //it activates the graph gameobject, sets the input polynom for the graph and calls the CreateGraph function
+    /// <summary>
+    /// this function is called when the user presses the button Graph
+    /// it activates the graph gameobject, sets the input polynom for the graph and calls the CreateGraph function
+    /// </summary>
     public void OnGraphPress()
     {
         graph.SetActive(true);
